@@ -1,2 +1,2 @@
 # avadev
-some de settings, vim, bashprofile, etc
+some dev settings, vim, bashprofile, etc
