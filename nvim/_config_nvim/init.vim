@@ -2,45 +2,66 @@ call plug#begin()
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-"Plug 'nvim-airline/airline.vim'
-"Plug 'nvim-airline/airline-themes.vim'
 Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 call plug#end()
 
-"netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 0
-let g:netrw_altv = 1
-nnoremap <leader>dd :Lexplore %:p:h<CR>
-nnoremap <Leader>da :Lexplore<CR>
-"let g:netrw_winsize = 25
-"augroup ProjectDrawer
-"  autocmd!
-"  autocmd VimEnter * :Vexplore
-"augroup END
-augroup END
-
-set rtp+=~/.fzf
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 colorscheme zenburn
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = 'lucius'
 
 let mapleader=" "
+
+"let rtp+=~/.fzf
+"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
+"netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 0
+let g:netrw_altv = 1
+nnoremap <leader>dd :Lexplore %:p:h<CR> "open netrw in dir of current file
+nnoremap <Leader>da :Lexplore<CR> "open netrw in the dir where vim started
+function! NetrwMapping()
+  nmap <buffer> H u
+  nmap <buffer> h -^
+  nmap <buffer> l <CR>
+
+  nmap <buffer> . gh
+  nmap <buffer> P <C-w>z
+
+  nmap <buffer> L <CR>:Lexplore<CR>
+  nmap <buffer> <Leader>dd :Lexplore<CR>
+endfunction
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
+"let g:netrw_winsize = 25
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
+"augroup END
+
 nnoremap <Leader>sv :source $MYVIMRC<CR> " source init.vim
+nnoremap <Leader>ev :e $MYVIMRC<CR> " edit init.vim
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fF <cmd>lua require('telescope.builtin').find_browser()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_commits()<cr>
 nnoremap <leader>fG <cmd>lua require('telescope.builtin').git_branches()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
+nnoremap <leader>fc <cmd>lua require('telescope.builtin').command_history()<cr>
+nnoremap <leader>fS <cmd>lua require('telescope.builtin').search_history()<cr>
+nnoremap <leader>fC <cmd>lua require('telescope.builtin').commands()<cr>
+nnoremap <leader>fo <cmd>lua require('telescope.builtin').colorscheme()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 nnoremap <leader><tab> <cmd>lua require('telescope.builtin').buffers()<cr> 
-"nnoremap <leader>q :b#<cr>
 nnoremap <leader>q <C-^>
+"previous tab
 
 set rtp+=~/.fzf
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
@@ -63,15 +84,14 @@ set softtabstop=4           " see multiple spaces as tabstops so <BS> does the r
 set expandtab               " converts tabs to white space
 set shiftwidth=4            " width for autoindents
 set autoindent              " indent a new line the same amount as the line just typed
-"set number                  " add line numbers
-set number relativenumber
-set wildmode=longest,list   " get bash-like tab completions
+set number                  " add line numbers
+"set number relativenumber
+"set wildmode=longest,list   " get bash-like tab completions
 set cc=80                  " set an 80 column border for good coding style
 filetype plugin indent on   "allow auto-indenting depending on file type
 syntax on                   " syntax highlighting
-set mouse=a                 " enable mouse click
+"set mouse=a                 " enable mouse click
 set clipboard=unnamedplus   " using system clipboard
-filetype plugin on
 set cursorline              " highlight current cursorline
 set ttyfast                 " Speed up scrolling in Vim
 " set spell                 " enable spell check (may need to download language package)
