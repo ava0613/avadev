@@ -1,5 +1,6 @@
 call plug#begin()
 
+Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'https://github.com/vim-airline/vim-airline.git'
@@ -7,14 +8,30 @@ Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 call plug#end()
 
 
+"set t_Co=256
+"set term='xterm-256color'
+"set termguicolors
+let $COLORTERM='gnome-terminal'
 colorscheme zenburn
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = 'lucius'
 
 let mapleader=" "
 
-"let rtp+=~/.fzf
-"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+set runtimepath+=~/.fzf
+let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.9 } }
+
+let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}'
+\ --bind ctrl-p:preview-up,ctrl-n:preview-down,
+\ctrl-b:preview-page-up,ctrl-f:preview-page-down,
+\ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,
+\ctrl-h:preview-top,ctrl-e:preview-bottom,
+\alt-up:half-page-up,alt-up:half-page-down"
+
+"set term-builtin_xterm
+"nmap <Ctrl-V><Del> x
+"imap <Ctrl-V><Del> <Ctrl-V><Esc>lxi
+"fixdel
 
 "netrw
 let g:netrw_banner = 0
@@ -45,26 +62,38 @@ augroup END
 "augroup END
 "augroup END
 
-nnoremap <Leader>sv :source $MYVIMRC<CR> " source init.vim
-nnoremap <Leader>ev :e $MYVIMRC<CR> " edit init.vim
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fF <cmd>lua require('telescope.builtin').find_browser()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_commits()<cr>
-nnoremap <leader>fG <cmd>lua require('telescope.builtin').git_branches()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fs <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
-nnoremap <leader>fc <cmd>lua require('telescope.builtin').command_history()<cr>
-nnoremap <leader>fS <cmd>lua require('telescope.builtin').search_history()<cr>
-nnoremap <leader>fC <cmd>lua require('telescope.builtin').commands()<cr>
-nnoremap <leader>fo <cmd>lua require('telescope.builtin').colorscheme()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <Leader>vs :source $MYVIMRC<CR> " source init.vim
+nnoremap <Leader>ve :e $MYVIMRC<CR> " edit init.vim
+
+nnoremap <leader>ff :Files<cr>
+nnoremap <leader>fg :GFiles<cr>
+nnoremap <leader>fb :Buffers<cr>
+
+nnoremap <leader>gs :GFiles?<cr>
+nnoremap <leader>gb :BCommits<cr>
+nnoremap <leader>gc :Commits<cr>
+nnoremap <leader>gf :GitFiles<cr>
+
+nnoremap <leader>hh :History<cr>
+nnoremap <leader>hc :History:<cr>
+nnoremap <leader>hs :History/<cr>
+
+"nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+"nnoremap <leader>fF <cmd>lua require('telescope.builtin').find_browser()<cr>
+"nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_commits()<cr>
+"nnoremap <leader>fG <cmd>lua require('telescope.builtin').git_branches()<cr>
+"nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+"nnoremap <leader>fs <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
+"nnoremap <leader>fc <cmd>lua require('telescope.builtin').command_history()<cr>
+"nnoremap <leader>fS <cmd>lua require('telescope.builtin').search_history()<cr>
+"nnoremap <leader>fC <cmd>lua require('telescope.builtin').commands()<cr>
+"nnoremap <leader>fo <cmd>lua require('telescope.builtin').colorscheme()<cr>
+"nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 nnoremap <leader><tab> <cmd>lua require('telescope.builtin').buffers()<cr> 
 nnoremap <leader>q <C-^>
 "previous tab
 
-set rtp+=~/.fzf
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 "<leader> - b - h :	Switch to the first buffer in the bufferlist
 "<leader> - b - j :	Cycle to the next buffer in the bufferlist
