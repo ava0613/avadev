@@ -66,8 +66,10 @@ nnoremap <Leader>vs :source $MYVIMRC<CR> " source init.vim
 nnoremap <Leader>ve :e $MYVIMRC<CR> " edit init.vim
 
 nnoremap <leader>ff :Files<cr>
+nnoremap <leader>fd :Files %:p:h<cr>
 nnoremap <leader>fg :GFiles<cr>
 nnoremap <leader>fb :Buffers<cr>
+nnoremap <leader><tab> :Buffers<cr>
 
 nnoremap <leader>gs :GFiles?<cr>
 nnoremap <leader>gb :BCommits<cr>
@@ -78,19 +80,20 @@ nnoremap <leader>hh :History<cr>
 nnoremap <leader>hc :History:<cr>
 nnoremap <leader>hs :History/<cr>
 
-"nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+
+nnoremap <leader>tff <cmd>lua require('telescope.builtin').find_files()<cr>
 "nnoremap <leader>fF <cmd>lua require('telescope.builtin').find_browser()<cr>
-"nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_commits()<cr>
-"nnoremap <leader>fG <cmd>lua require('telescope.builtin').git_branches()<cr>
-"nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-"nnoremap <leader>fs <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
-"nnoremap <leader>fc <cmd>lua require('telescope.builtin').command_history()<cr>
-"nnoremap <leader>fS <cmd>lua require('telescope.builtin').search_history()<cr>
-"nnoremap <leader>fC <cmd>lua require('telescope.builtin').commands()<cr>
+nnoremap <leader>tgc <cmd>lua require('telescope.builtin').git_commits()<cr>
+nnoremap <leader>fgr <cmd>lua require('telescope.builtin').git_branches()<cr>
+nnoremap <leader>tfb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>ts <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
+nnoremap <leader>thc <cmd>lua require('telescope.builtin').command_history()<cr>
+nnoremap <leader>ths <cmd>lua require('telescope.builtin').search_history()<cr>
+nnoremap <leader>tC <cmd>lua require('telescope.builtin').commands()<cr>
 "nnoremap <leader>fo <cmd>lua require('telescope.builtin').colorscheme()<cr>
 "nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
-nnoremap <leader><tab> <cmd>lua require('telescope.builtin').buffers()<cr> 
+"nnoremap <leader><tab> <cmd>lua require('telescope.builtin').buffers()<cr> 
 nnoremap <leader>q <C-^>
 "previous tab
 
