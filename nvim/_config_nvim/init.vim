@@ -5,6 +5,12 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
+
+"Plug 'xolox/vim-session'
+"Plug 'itchyny/lightline.vim'
+"Plug 'flazz/vim-colorschemes'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'tpope/vim-fugitive'
 call plug#end()
 
 
@@ -65,6 +71,12 @@ augroup END
 nnoremap <Leader>vs :source $MYVIMRC<CR> " source init.vim
 nnoremap <Leader>ve :e $MYVIMRC<CR> " edit init.vim
 
+nnoremap <Leader>nn :set number!<CR> " toggle line numbers
+nnoremap <Leader>nr :set relativenumber!<CR> " toggle line numbers
+"nnoremap <Leader>nn :nonumber<CR> " toggle line numbers
+
+
+
 nnoremap <leader>ff :Files<cr>
 nnoremap <leader>fd :Files %:p:h<cr>
 nnoremap <leader>fg :GFiles<cr>
@@ -80,6 +92,17 @@ nnoremap <leader>hh :History<cr>
 nnoremap <leader>hc :History:<cr>
 nnoremap <leader>hs :History/<cr>
 
+
+" ----------------------------------------------------------------------------
+" vim-fugitive FIMXE these
+" ----------------------------------------------------------------------------
+nnoremap <Leader>xgs :Gstatus<CR>
+nnoremap <Leader>xgc :Gcommit<CR>
+nnoremap <Leader>xgd :Gdiff<CR>
+nnoremap <Leader>xgl :Glog<CR>
+nnoremap <Leader>xgp :Gpull<CR>
+nnoremap <Leader>xgu :Gpush<CR>
+nnoremap <Leader>xgb :Gblame<CR>
 
 nnoremap <leader>tff <cmd>lua require('telescope.builtin').find_files()<cr>
 "nnoremap <leader>fF <cmd>lua require('telescope.builtin').find_browser()<cr>
