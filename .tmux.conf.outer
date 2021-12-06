@@ -1,0 +1,70 @@
+# outer tmux
+set-option -g prefix C-a
+unbind-key C-b
+bind-key C-a send-prefix
+
+set-option -g status-position top
+# Set status bar on
+set -g status on
+
+# Update the status line every second
+set -g status-interval 1
+
+# Set the position of window lists.
+set -g status-justify left # [left | centre | right]
+
+# Set Vi style keybinding in the status line
+set -g status-keys vi
+
+# Set the status bar position
+set -g status-position top # [top, bottom]
+
+# Set status bar background and foreground color.
+set -g status-style fg=colour136,bg="#502b36"
+
+# Set left side status bar length and style
+set -g status-left-length 60
+set -g status-left-style default
+
+# Display the session name
+set -g status-left "#[fg=green] #S #[default]"
+
+# Display the os version (Mac Os)
+#set -ag status-left " #[fg=black] #[fg=green,bright]  #(sw_vers -productVersion) #[default]"
+
+# Display the battery percentage (Mac OS)
+#set -ag status-left "#[fg=green,bg=default,bright] 🔋 #(pmset -g batt | tail -1 | awk '{print $3}' | tr -d ';') #[default]"
+
+# Set right side status bar length and style
+set -g status-right-length 140
+set -g status-right-style default
+
+# Display the cpu load (Mac OS)
+#set -g status-right "#[fg=green,bg=default,bright]  #(top -l 1 | grep -E "^CPU" | sed 's/.*://') #[default]"
+set -g status-right "#[fg=green,bg=default,bright] #[default]"
+
+# Display the date
+#set -ag status-right "#[fg=white,bg=default]  %a %d #[default]"
+
+# Display the time
+set -ag status-right "#[fg=colour172,bright,bg=default] ⌚︎%Y-%m-%d %H:%M %p #[default]"
+
+# Display the hostname
+set -ag status-right "#[fg=cyan,bg=default] ☠ #H #[default]"
+
+# Set the inactive window color and style
+set -g window-status-style fg=colour244,bg=default
+set -g window-status-format ' #I #W '
+
+# Set the active window color and style
+set -g window-status-current-style fg=black,bg=colour136
+set -g window-status-current-format ' #I #W '
+
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+
+set -g base-index 1
+setw -g pane-base-index 1
+set-option -g history-limit 100000
+
+
