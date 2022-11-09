@@ -117,7 +117,7 @@ nnoremap <leader>tC <cmd>lua require('telescope.builtin').commands()<cr>
 "nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 "nnoremap <leader><tab> <cmd>lua require('telescope.builtin').buffers()<cr> 
-nnoremap <leader>q <C-^>
+nnoremap <leader>z <C-^>
 "previous tab
 
 
