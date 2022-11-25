@@ -2,9 +2,13 @@ call plug#begin()
 
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+"Plug 'nvim-telescope/telescope.nvim'
 Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
+Plug 'kdheepak/lazygit.nvim'
+Plug 'https://tpope.io/vim/commentary.git'
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons' " for nvim-tree icons
 
 "Plug 'xolox/vim-session'
 "Plug 'itchyny/lightline.vim'
@@ -24,6 +28,30 @@ let g:airline_theme = 'lucius'
 
 let mapleader=" "
 
+lua <<EOF
+--vim.g.nvim_tree_width = 25 
+--vim.g.nvim_tree_gitignore = 1 
+--vim.g.nvim_tree_indent_markers = 1 
+--require("nvim-tree").setup({
+require"nvim-tree".setup {
+--    auto_open=1,
+--    auto_close=1
+}
+
+EOF
+
+
+
+" autoclose - instead of some fancy plugin
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+
+
 set runtimepath+=~/.fzf
 let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.9 } }
 
@@ -34,11 +62,21 @@ let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbe
 \ctrl-h:preview-top,ctrl-e:preview-bottom,
 \alt-up:half-page-up,alt-up:half-page-down"
 
+let g:lazygit_floating_window_winblend = 0 " transparency of floating window
+let g:lazygit_floating_window_scaling_factor = 0.96 " scaling factor for floating window
+let g:lazygit_floating_window_corner_chars = ['?', '?', '?', '?'] " customize lazygit popup window corner characters
+let g:lazygit_floating_window_use_plenary = 0 " use plenary.nvim to manage floating window if available
+let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
+
+let g:lazygit_use_custom_config_file_path = 0 " config file path is evaluated if this value is 1
+let g:lazygit_config_file_path = '' " custom config file path
+
 "set term-builtin_xterm
 "nmap <Ctrl-V><Del> x
 "imap <Ctrl-V><Del> <Ctrl-V><Esc>lxi
 "fixdel
 
+nnoremap <leader>e :NvimTreeFindFile<CR> "open netrw in dir of current file
 "netrw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -76,6 +114,8 @@ nnoremap <Leader>nr :set relativenumber!<CR> " toggle line numbers
 "nnoremap <Leader>nn :nonumber<CR> " toggle line numbers
 
 
+nnoremap <leader>llp :LazyGit<cr>
+nnoremap <leader>llf :LazyGitFilterCurrentFile<cr>
 
 nnoremap <leader>ff :Files<cr>
 nnoremap <leader>fd :Files %:p:h<cr>
