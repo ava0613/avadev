@@ -80,6 +80,11 @@ wk.register({
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["<tab>"] = { "<cmd>:Buffers<CR>", "Buffers" },
 
+  e = {
+     name = "explorer - nvim-tree",
+     w = {"<cmd>:NvimTreeFindFile<cr>","find file"},
+     e = {"<cmd>:NvimTreeToggle<cr>","toggle"},
+     },
   n = {
      name = "line numbering",
      n = {"<cmd>:set number!<cr>","toggle line numbers"},
@@ -118,7 +123,7 @@ wk.register({
          }
   },
   x = {
-    name = "file", -- optional group name
+    name = "xdemo", -- optional group name
     f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap=false, buffer = 1} , -- adritional options for creating the keymap
     n = { "New File" }, -- just a label. don't create any mapping
@@ -165,30 +170,31 @@ let g:lazygit_config_file_path = '' " custom config file path
 "imap <Ctrl-V><Del> <Ctrl-V><Esc>lxi
 "fixdel
 
-nnoremap <leader>ee :NvimTreeFindFile<CR> "open netrw in dir of current file
-nnoremap <leader>ec :NvimTreeToggle<CR> "open netrw in dir of current file
-"netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 0
-let g:netrw_altv = 1
-nnoremap <leader>dd :Lexplore %:p:h<CR> "open netrw in dir of current file
-nnoremap <Leader>da :Lexplore<CR> "open netrw in the dir where vim started
-function! NetrwMapping()
-  nmap <buffer> H u
-  nmap <buffer> h -^
-  nmap <buffer> l <CR>
+"nnoremap <leader>ee :NvimTreeFindFile<CR> "open netrw in dir of current file
+"nnoremap <leader>ec :NvimTreeToggle<CR> "open netrw in dir of current file
+""netrw
+"let g:netrw_banner = 0
+"let g:netrw_liststyle = 3
+"let g:netrw_browse_split = 0
+"let g:netrw_altv = 1
+"nnoremap <leader>dd :Lexplore %:p:h<CR> "open netrw in dir of current file
+"nnoremap <Leader>da :Lexplore<CR> "open netrw in the dir where vim started
+"function! NetrwMapping()
+"  nmap <buffer> H u
+"  nmap <buffer> h -^
+"  nmap <buffer> l <CR>
 
-  nmap <buffer> . gh
-  nmap <buffer> P <C-w>z
+"  nmap <buffer> . gh
+"  nmap <buffer> P <C-w>z
 
-  nmap <buffer> L <CR>:Lexplore<CR>
-  nmap <buffer> <Leader>dd :Lexplore<CR>
-endfunction
-augroup netrw_mapping
-  autocmd!
-  autocmd filetype netrw call NetrwMapping()
-augroup END
+"  nmap <buffer> L <CR>:Lexplore<CR>
+"  nmap <buffer> <Leader>dd :Lexplore<CR>
+"endfunction
+"augroup netrw_mapping
+"  autocmd!
+"  autocmd filetype netrw call NetrwMapping()
+"augroup END
+
 "let g:netrw_winsize = 25
 "augroup ProjectDrawer
 "  autocmd!
