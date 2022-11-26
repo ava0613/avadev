@@ -75,7 +75,8 @@ local wk = require("which-key")
 wk.register({
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Quit" },
-  ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
+  -- ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
+  ["/"] = { "<cmd>:Commentary<cr>","Comment toggle" },
   ["c"] = { "<cmd>:bd<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["<tab>"] = { "<cmd>:Buffers<CR>", "Buffers" },
