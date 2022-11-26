@@ -34,6 +34,11 @@ if [ $HOSTNAME = 'smixdev11' ]; then
 else # default atom machines
     ATOM_ROOT='/home/avasarhely/atom'                                                  
 fi
+if [ -d $HOME"/work/atom" ]; then  # an ava developer machine
+    ATOM_ROOT=$HOME"/work/atom"
+else # atom deploy machines
+    ATOM_ROOT='/home/avasarhely/atom'                                                  
+fi
 
 alias cda='cd $ATOM_ROOT'                                                        
 alias cdaa='cd $(find $ATOM_ROOT -type d | fzf )'                                
