@@ -28,7 +28,7 @@ alias cdw='cd ~/work'
 if [ $HOSTNAME = 'smixdev11' ]; then
     ATOM_ROOT='/home/smix/work/atom'                                                  
 else # default atom machines
-    ATOM_ROOT='/home/avasarhely/atom'                                                  
+    ATOM_ROOT=$HOME'/work/atom'                                                  
 fi
 
 alias cda='cd $ATOM_ROOT'                                                        
@@ -48,7 +48,7 @@ curl -x 172.28.18.8:3128  -U res\\\\vasarhely1a613  info.cern.ch;
 echo 'curl -x 172.28.18.9:3128  -U res\\vasarhely1a613  info.cern.ch'; 
 curl -x 172.28.18.9:3128 -U res\\\\vasarhely1a613  info.cern.ch"
 
-http_proxy=172.28.18.8:3128 
-https_proxy=172.28.18.8:3128 
-noproxy=svn.nis.t-mobile.intra
+export http_proxy=172.28.18.8:3128 
+export https_proxy=172.28.18.8:3128 
+export noproxy=svn.nis.t-mobile.intra
 

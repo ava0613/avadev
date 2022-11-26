@@ -3,5 +3,5 @@ cp nvim/plug.vim ~/.local/share/nvim/site/autoload/
 
 cp .bashrc.ava.sh ~/
 cp nvim/init.vim ~/.config/nvim/
-cp nvim.appimage ~/.local/bin/nvim
+cp nvim/nvim.appimage ~/.local/bin/nvim
 
