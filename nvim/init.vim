@@ -17,7 +17,7 @@ Plug 'folke/which-key.nvim'  "menu for leader
 "Plug 'xolox/vim-session'
 "Plug 'itchyny/lightline.vim'
 "Plug 'airblade/vim-gitgutter'
-"Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 
@@ -76,7 +76,7 @@ wk.register({
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Quit" },
   ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
-  ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
+  ["c"] = { "<cmd>:bd<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["<tab>"] = { "<cmd>:Buffers<CR>", "Buffers" },
 
