@@ -2,7 +2,7 @@ call plug#begin()
 
 ""Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'nvim-lua/plenary.nvim'
-"Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 Plug 'kdheepak/lazygit.nvim'
