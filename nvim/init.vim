@@ -12,6 +12,7 @@ Plug 'nvim-tree/nvim-web-devicons' " for nvim-tree icons
 Plug 'flazz/vim-colorschemes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'folke/which-key.nvim'  "menu for leader
 
 "Plug 'xolox/vim-session'
 "Plug 'itchyny/lightline.vim'
@@ -58,6 +59,74 @@ require"nvim-tree".setup {
   },
 }
 
+
+local wk = require("which-key")
+--.setup {
+-- your configuration comes here
+-- or leave it empty to use the default settings
+-- refer to the configuration section below
+--}
+-- wk.register(mappings,  {
+--     n = {
+--         name = "line numbering",
+--         a = {"<cmd>:set relativenumber!<cr>","toggle"}
+--         }
+--       }, { prefix = "<leader>" })
+wk.register({
+  ["w"] = { "<cmd>w!<CR>", "Save" },
+  ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Quit" },
+  ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
+  ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
+  ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+  ["<tab>"] = { "<cmd>:Buffers<CR>", "Buffers" },
+
+  n = {
+     name = "line numbering",
+     n = {"<cmd>:set number!<cr>","toggle line numbers"},
+     r = {"<cmd>:set relativenumber!<cr>","toggle relative numbers"},
+     },
+  f = {
+     name = "Find with fzf",
+     f = {"<cmd>:Files<cr>","Files"},
+     d = {"<cmd>:Files %:p:h<cr>","files in buffer's dir"},
+     b = {"<cmd>:Buffers<cr>","buffers"},
+     g = {
+         name = "git",
+         s = {"<cmd>:GFiles?<cr>","GFiles"},
+         b = {"<cmd>:BCommits<cr>","BCommits"},
+         c = {"<cmd>:Commits<cr>","Commits"},
+         f = {"<cmd>:GitFiles<cr>","GitFiles"},
+         }
+     },
+  v = {
+     name = "Nvim config",
+     e = {"<cmd>:e $MYVIMRC<cr>","edit init.vim"},
+     s = {"<cmd>:source $MYVIMRC<cr>","edit init.vim"},
+  },
+  g = {
+     name = "git",
+     g = {"<cmd>:LazyGit<cr>","lz for the project"},
+     h = {"<cmd>:LazyGitCurrentFile<cr>","lz for the buffer"},
+     f = {name = "fugitive",
+        g = {"<cmd>:Gstatus<cr>","Gstatus"},
+        c = {"<cmd>:Gcommit<cr>","Gcommit"},
+        d = {"<cmd>:Gdiff<cr>","Gdiff"},
+        l = {"<cmd>:Glog<cr>","Glog"},
+        p = {"<cmd>:Gpull<cr>","Gpull"},
+        u = {"<cmd>:Gpush<cr>","Gpush"},
+        b = {"<cmd>:Gblame<cr>","Gblame"},
+         }
+  },
+  x = {
+    name = "file", -- optional group name
+    f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
+    r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap=false, buffer = 1} , -- adritional options for creating the keymap
+    n = { "New File" }, -- just a label. don't create any mapping
+    e = "Edit File", -- same as above
+    ["1"] = "which_key_ignore",  -- special label to hide it in the popup
+    b = { function() print("bar") end, "Foobar" } -- you can also pass functions!
+  },
+}, { prefix = "<leader>" })
 EOF
 
 
@@ -127,43 +196,43 @@ augroup END
 "augroup END
 "augroup END
 
-nnoremap <Leader>vs :source $MYVIMRC<CR> " source init.vim
-nnoremap <Leader>ve :e $MYVIMRC<CR> " edit init.vim
+" nnoremap <Leader>vs :source $MYVIMRC<CR> " source init.vim
+" nnoremap <Leader>ve :e $MYVIMRC<CR> " edit init.vim
 
-nnoremap <Leader>nn :set number!<CR> " toggle line numbers
-nnoremap <Leader>nr :set relativenumber!<CR> " toggle line numbers
+" nnoremap <Leader>nn :set number!<CR> " toggle line numbers
+" nnoremap <Leader>nr :set relativenumber!<CR> " toggle line numbers
 "nnoremap <Leader>nn :nonumber<CR> " toggle line numbers
 
 
-nnoremap <leader>llp :LazyGit<cr>
-nnoremap <leader>llf :LazyGitFilterCurrentFile<cr>
 
-nnoremap <leader>ff :Files<cr>
-nnoremap <leader>fd :Files %:p:h<cr>
-nnoremap <leader>fg :GFiles<cr>
-nnoremap <leader>fb :Buffers<cr>
-nnoremap <leader><tab> :Buffers<cr>
+" nnoremap <leader>ff :Files<cr>
+" nnoremap <leader>fd :Files %:p:h<cr>
+" nnoremap <leader>fg :GFiles<cr>
+" nnoremap <leader>fb :Buffers<cr>
+" nnoremap <leader><tab> :Buffers<cr>
 
-nnoremap <leader>gs :GFiles?<cr>
-nnoremap <leader>gb :BCommits<cr>
-nnoremap <leader>gc :Commits<cr>
-nnoremap <leader>gf :GitFiles<cr>
+" nnoremap <leader>gs :GFiles?<cr>
+" nnoremap <leader>gb :BCommits<cr>
+" nnoremap <leader>gc :Commits<cr>
+" nnoremap <leader>gf :GitFiles<cr>
 
 nnoremap <leader>hh :History<cr>
 nnoremap <leader>hc :History:<cr>
 nnoremap <leader>hs :History/<cr>
 
 
+" nnoremap <leader>gg :LazyGit<cr>
+" nnoremap <leader>gh :LazyGitFilterCurrentFile<cr>
 " ----------------------------------------------------------------------------
 " vim-fugitive FIMXE these
 " ----------------------------------------------------------------------------
-nnoremap <Leader>xgs :Gstatus<CR>
-nnoremap <Leader>xgc :Gcommit<CR>
-nnoremap <Leader>xgd :Gdiff<CR>
-nnoremap <Leader>xgl :Glog<CR>
-nnoremap <Leader>xgp :Gpull<CR>
-nnoremap <Leader>xgu :Gpush<CR>
-nnoremap <Leader>xgb :Gblame<CR>
+" nnoremap <Leader>xgs :Gstatus<CR>
+" nnoremap <Leader>xgc :Gcommit<CR>
+" nnoremap <Leader>xgd :Gdiff<CR>
+" nnoremap <Leader>xgl :Glog<CR>
+" nnoremap <Leader>xgp :Gpull<CR>
+" nnoremap <Leader>xgu :Gpush<CR>
+" nnoremap <Leader>xgb :Gblame<CR>
 
 nnoremap <leader>tff <cmd>lua require('telescope.builtin').find_files()<cr>
 "nnoremap <leader>fF <cmd>lua require('telescope.builtin').find_browser()<cr>
