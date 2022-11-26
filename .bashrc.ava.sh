@@ -11,6 +11,8 @@ alt-up:half-page-up,alt-up:half-page-down"
 
 alias fff="fzf --bind 'enter:execute(nvim.appimage {})'"
 
+alias cdava='cd '$HOME'/work/avadev'
+
 ### lazygit
 alias llg='lazygit'                                                              
 # start lazygit with a filter to the current dir or to a file/dir in the current dir  
@@ -21,6 +23,8 @@ lazygit_filtered()
 alias llh='lazygit_filtered'                                 
 
 alias cdw='cd ~/work'
+
+
 
 ###########
 # ATOM stuff
