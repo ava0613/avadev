@@ -111,7 +111,7 @@ wk.register({
   g = {
      name = "git",
      g = {"<cmd>:LazyGit<cr>","lz for the project"},
-     h = {"<cmd>:LazyGitCurrentFile<cr>","lz for the buffer"},
+     h = {"<cmd>:LazyGitFilterCurrentFile<cr>","lz for the buffer"},
      f = {name = "fugitive",
         g = {"<cmd>:Gstatus<cr>","Gstatus"},
         c = {"<cmd>:Gcommit<cr>","Gcommit"},
