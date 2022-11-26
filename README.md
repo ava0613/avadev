@@ -11,6 +11,14 @@
         - have the https_proxy env var set
         - from within nvim :PlugInstall or :PlugUpdate
 
+INSTALL NEOVIM
+- download and install neovim.appimage 
+- plugins might not work out of the box (plug#begin error with init.vim):
+    - sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    - then run :plugupdate, :pluginstall
+- for fzf to work from within neovim I had to do an fzf install, copyig fzf binaries was not enough
+
 TODO
 - make an sh install script to copy files from avadev to their proper place
 - also make an script to collect the files into avadev
