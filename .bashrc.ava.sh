@@ -29,15 +29,10 @@ alias cdw='cd ~/work'
 ###########
 # ATOM stuff
 #
-if [ $HOSTNAME = 'smixdev11' ]; then
-    ATOM_ROOT='/home/smix/work/atom'                                                  
-else # default atom machines
-    ATOM_ROOT='/home/avasarhely/atom'                                                  
-fi
 if [ -d $HOME"/work/atom" ]; then  # an ava developer machine
     ATOM_ROOT=$HOME"/work/atom"
 else # atom deploy machines
-    ATOM_ROOT='/home/avasarhely/atom'                                                  
+    ATOM_ROOT=$HOME'/atom'                                                  
 fi
 
 alias cda='cd $ATOM_ROOT'                                                        
