@@ -3,8 +3,13 @@ call plug#begin()
 ""Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'https://github.com/vim-airline/vim-airline.git'
-Plug 'https://github.com/vim-airline/vim-airline-themes.git'
+" Plug 'https://github.com/vim-airline/vim-airline.git'
+" Plug 'https://github.com/vim-airline/vim-airline-themes.git'
+" statusline, and icons
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+
+Plug 'akinsho/bufferline.nvim'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'https://tpope.io/vim/commentary.git'
 Plug 'nvim-tree/nvim-tree.lua'
@@ -13,6 +18,8 @@ Plug 'flazz/vim-colorschemes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'folke/which-key.nvim'  "menu for leader
+Plug 'AckslD/nvim-neoclip.lua'  "clipboard 
+Plug 'lewis6991/gitsigns.nvim'
 
 "Plug 'xolox/vim-session'
 "Plug 'itchyny/lightline.vim'
@@ -26,12 +33,16 @@ call plug#end()
 "set termguicolors
 let $COLORTERM='gnome-terminal'
 colorscheme zenburn
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'lucius'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_theme = 'lucius'
 
 let mapleader=" "
 
 lua <<EOF
+vim.opt.termguicolors = true
+require("bufferline").setup{}
+require('lualine').setup()
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.nvim_tree_width = 50
@@ -78,8 +89,14 @@ wk.register({
   -- ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
   ["/"] = { "<cmd>:Commentary<cr>","Comment toggle" },
   ["c"] = { "<cmd>:bd<CR>", "Close Buffer" },
+  ["p"] = { "<cmd>:Telescope neoclip<CR>", "neoclip" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["<tab>"] = { "<cmd>:Buffers<CR>", "Buffers" },
+  ["<up>"] = { "<cmd>:Telescope buffers<CR>", "buffers" },
+  ["<down>"] = { "<C-^>", "buffers" },
+  ["<left>"] = { "<cmd>:BufferLineCyclePrev<CR>", "Pref buffer" },
+  ["<right>"] = { "<cmd>:BufferLineCycleNext<CR>", "Next buffer" },
+  ["<PageDown>"] = { "<cmd>:Telescope marks<CR>", "marks" },
 
   e = {
      name = "explorer - nvim-tree",
@@ -104,24 +121,61 @@ wk.register({
          f = {"<cmd>:GitFiles<cr>","GitFiles"},
          }
      },
+  t = {name = 'Telescope',
+    
+    f = {"<cmd>lua require('telescope.builtin').find_files()<cr>",'Files'},
+    F = {"<cmd>lua require('telescope.builtin').find_browser()<cr>","find browser"},
+    -- nnoremap <leader>tgc <cmd>lua require('telescope.builtin').git_commits()<cr>
+    -- nnoremap <leader>fgr <cmd>lua require('telescope.builtin').git_branches()<cr>
+    -- nnoremap <leader>tfb <cmd>lua require('telescope.builtin').buffers()<cr>
+    g = {"<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>","fuzzy grep buffer"},
+    H = {"<cmd>lua require('telescope.builtin').command_history()<cr>","command history"},
+    h = {"<cmd>lua require('telescope.builtin').search_history()<cr>","search history"},
+-- nnoremap <leader>tC <cmd>lua require('telescope.builtin').commands()<cr>
+--nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+      },
   v = {
      name = "Nvim config",
      e = {"<cmd>:e $MYVIMRC<cr>","edit init.vim"},
-     s = {"<cmd>:source $MYVIMRC<cr>","edit init.vim"},
+     s = {"<cmd>:source $MYVIMRC<cr>","source init.vim"},
+     o = { "<cmd>Telescope colorscheme<cr>", "colorcheme /telesope" },
   },
   g = {
-     name = "git",
-     g = {"<cmd>:LazyGit<cr>","lz for the project"},
-     h = {"<cmd>:LazyGitFilterCurrentFile<cr>","lz for the buffer"},
-     f = {name = "fugitive",
-        g = {"<cmd>:Gstatus<cr>","Gstatus"},
-        c = {"<cmd>:Gcommit<cr>","Gcommit"},
-        d = {"<cmd>:Gdiff<cr>","Gdiff"},
-        l = {"<cmd>:Glog<cr>","Glog"},
-        p = {"<cmd>:Gpull<cr>","Gpull"},
-        u = {"<cmd>:Gpush<cr>","Gpush"},
-        b = {"<cmd>:Gblame<cr>","Gblame"},
-         }
+    name = "Git",
+    g = {"<cmd>:LazyGit<cr>","lz for the project"},
+    --g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
+    h = {"<cmd>:LazyGitFilterCurrentFile<cr>","lz for the buffer"},
+    j = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
+    k = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
+    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+    s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+    u = {
+      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+      "Undo Stage Hunk",
+    },
+    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+    C = {
+      "<cmd>Telescope git_bcommits<cr>",
+      "Checkout commit(for current file)",
+    },
+    d = {
+      "<cmd>Gitsigns diffthis HEAD<cr>",
+      "Git Diff",
+    },
+  f = {name = "fugitive",
+    g = {"<cmd>:Gstatus<cr>","Gstatus"},
+    c = {"<cmd>:Gcommit<cr>","Gcommit"},
+    d = {"<cmd>:Gdiff<cr>","Gdiff"},
+    l = {"<cmd>:Glog<cr>","Glog"},
+    p = {"<cmd>:Gpull<cr>","Gpull"},
+    u = {"<cmd>:Gpush<cr>","Gpush"},
+    b = {"<cmd>:Gblame<cr>","Gblame"},
+     }
   },
   x = {
     name = "xdemo", -- optional group name
@@ -133,8 +187,29 @@ wk.register({
     b = { function() print("bar") end, "Foobar" } -- you can also pass functions!
   },
 }, { prefix = "<leader>" })
-EOF
 
+
+
+require "neoclip".setup {
+    -- {'kkharji/sqlite.lua', module = 'sqlite'},
+    -- you'll need at least one of these
+    -- {'nvim-telescope/telescope.nvim'},
+    -- {'ibhagwan/fzf-lua'},
+  }
+
+
+require "telescope".setup {
+  pickers = {
+    colorscheme = {
+      enable_preview = true
+    }
+  }
+}
+require('telescope').load_extension('neoclip')
+
+require('gitsigns').setup()
+
+EOF
 
 
 " autoclose - instead of some fancy plugin
@@ -241,20 +316,20 @@ nnoremap <leader>hs :History/<cr>
 " nnoremap <Leader>xgu :Gpush<CR>
 " nnoremap <Leader>xgb :Gblame<CR>
 
-nnoremap <leader>tff <cmd>lua require('telescope.builtin').find_files()<cr>
+" nnoremap <leader>tff <cmd>lua require('telescope.builtin').find_files()<cr>
 "nnoremap <leader>fF <cmd>lua require('telescope.builtin').find_browser()<cr>
-nnoremap <leader>tgc <cmd>lua require('telescope.builtin').git_commits()<cr>
-nnoremap <leader>fgr <cmd>lua require('telescope.builtin').git_branches()<cr>
-nnoremap <leader>tfb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>ts <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
-nnoremap <leader>thc <cmd>lua require('telescope.builtin').command_history()<cr>
-nnoremap <leader>ths <cmd>lua require('telescope.builtin').search_history()<cr>
-nnoremap <leader>tC <cmd>lua require('telescope.builtin').commands()<cr>
+" nnoremap <leader>tgc <cmd>lua require('telescope.builtin').git_commits()<cr>
+" nnoremap <leader>fgr <cmd>lua require('telescope.builtin').git_branches()<cr>
+" nnoremap <leader>tfb <cmd>lua require('telescope.builtin').buffers()<cr>
+" nnoremap <leader>ts <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
+" nnoremap <leader>thc <cmd>lua require('telescope.builtin').command_history()<cr>
+" nnoremap <leader>ths <cmd>lua require('telescope.builtin').search_history()<cr>
+" nnoremap <leader>tC <cmd>lua require('telescope.builtin').commands()<cr>
 "nnoremap <leader>fo <cmd>lua require('telescope.builtin').colorscheme()<cr>
 "nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 "nnoremap <leader><tab> <cmd>lua require('telescope.builtin').buffers()<cr> 
-nnoremap <leader>z <C-^>
+" nnoremap <leader>z <C-^>
 "previous tab
 
 
@@ -308,13 +383,13 @@ set ttyfast                 " Speed up scrolling in Vim
 "Ctrl - d :	Scroll down through documentation menu.
 ":	Confirm completion.
 
+set encoding=utf-8
 
 "fonts for airline
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-set encoding=utf-8
 " unicode symbols
 "let g:airline_left_sep = '»'
 "let g:airline_left_sep = '▶'
