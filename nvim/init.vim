@@ -96,7 +96,9 @@ wk.register({
   ["<down>"] = { "<C-^>", "buffers" },
   ["<left>"] = { "<cmd>:BufferLineCyclePrev<CR>", "Pref buffer" },
   ["<right>"] = { "<cmd>:BufferLineCycleNext<CR>", "Next buffer" },
-  ["<PageDown>"] = { "<cmd>:Telescope marks<CR>", "marks" },
+  ["<PageDown>"] = { "<cmd>:Telescope oldfiles<CR>", "oldfiles" },
+  ["<home>"] = { "<cmd>:Telescope registers<CR>", "registers" },
+  ["<end>"] = { "<cmd>:Telescope marks<CR>", "marks" },
 
   e = {
      name = "explorer - nvim-tree",
@@ -169,13 +171,13 @@ wk.register({
       "Git Diff",
     },
   f = {name = "fugitive",
-    g = {"<cmd>:Gstatus<cr>","Gstatus"},
-    c = {"<cmd>:Gcommit<cr>","Gcommit"},
-    d = {"<cmd>:Gdiff<cr>","Gdiff"},
-    l = {"<cmd>:Glog<cr>","Glog"},
-    p = {"<cmd>:Gpull<cr>","Gpull"},
-    u = {"<cmd>:Gpush<cr>","Gpush"},
-    b = {"<cmd>:Gblame<cr>","Gblame"},
+    g = {"<cmd>:Git status<cr>","Gstatus"},
+    c = {"<cmd>:Git commit<cr>","Gcommit"},
+    d = {"<cmd>:Git diff<cr>","Gdiff"},
+    l = {"<cmd>:Git log<cr>","Glog"},
+    p = {"<cmd>:Git pull<cr>","Gpull"},
+    u = {"<cmd>:Git push<cr>","Gpush"},
+    b = {"<cmd>:Git blame<cr>","Gblame"},
      }
   },
   x = {
