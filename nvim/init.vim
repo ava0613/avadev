@@ -22,6 +22,7 @@ Plug 'AckslD/nvim-neoclip.lua'  "clipboard
 Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 "Plug 'xolox/vim-session'
 "Plug 'itchyny/lightline.vim'
 "Plug 'airblade/vim-gitgutter'
@@ -31,7 +32,7 @@ call plug#end()
 
 "set t_Co=256
 "set term='xterm-256color'
-"set termguicolors
+set termguicolors
 let $COLORTERM='gnome-terminal'
 colorscheme zenburn
 " let g:airline#extensions#tabline#enabled = 1
@@ -126,7 +127,8 @@ wk.register({
   t = {name = 'Telescope',
     
     f = {"<cmd>lua require('telescope.builtin').find_files()<cr>",'Files'},
-    F = {"<cmd>lua require('telescope.builtin').find_browser()<cr>","find browser"},
+    d = {"<cmd>lua require('telescope.builtin').find_files({search_dirs={'%:p:h'}})<cr>",'Files fro buf'},
+    e = {"<cmd>:Telescope file_browser path=%:p:h<cr>","file browser"},
     -- nnoremap <leader>tgc <cmd>lua require('telescope.builtin').git_commits()<cr>
     -- nnoremap <leader>fgr <cmd>lua require('telescope.builtin').git_branches()<cr>
     -- nnoremap <leader>tfb <cmd>lua require('telescope.builtin').buffers()<cr>
@@ -201,7 +203,61 @@ require "neoclip".setup {
   }
 
 
+local actions = require('telescope.actions')
 require "telescope".setup {
+    defaults = {
+      --prompt_prefix = lvim.icons.ui.Telescope .. " ",
+      --selection_caret = lvim.icons.ui.Forward .. " ",
+      entry_prefix = "  ",
+      initial_mode = "insert",
+      selection_strategy = "reset",
+      sorting_strategy = "descending",
+      layout_strategy = "horizontal",
+      layout_config = {
+        width = 0.95,
+        height = 0.95,
+        preview_cutoff = 120,
+        horizontal = {
+          preview_width = function(_, cols, _)
+            if cols < 120 then
+              return math.floor(cols * 0.5)
+            end
+            return math.floor(cols * 0.6)
+          end,
+          mirror = false,
+        },
+        vertical = { mirror = false },
+      },
+      vimgrep_arguments = {
+        "rg",
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--smart-case",
+        "--hidden",
+        "--glob=!.git/",
+      },
+    mappings = {
+        i = {
+          ["<C-n>"] = actions.move_selection_next,
+          ["<C-p>"] = actions.move_selection_previous,
+          ["<C-c>"] = actions.close,
+          ["<C-j>"] = actions.cycle_history_next,
+          ["<C-k>"] = actions.cycle_history_prev,
+          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+          ["<CR>"] = actions.select_default,
+          ["<PageUp>"] = actions.preview_scrolling_up,  -- custom override pgup,pgdown
+          ["<PageDown>"] = actions.preview_scrolling_down,  -- custom override pgup,pgdown
+        },
+        n = {
+          ["<C-n>"] = actions.move_selection_next,
+          ["<C-p>"] = actions.move_selection_previous,
+          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+        },
+      },
+    },
   pickers = {
     colorscheme = {
       enable_preview = true
@@ -209,6 +265,7 @@ require "telescope".setup {
   }
 }
 require('telescope').load_extension('neoclip')
+require("telescope").load_extension "file_browser"
 
 require('gitsigns').setup()
 
