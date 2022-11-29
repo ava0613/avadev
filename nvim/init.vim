@@ -92,22 +92,22 @@ wk.register({
   ["c"] = { "<cmd>:bd<CR>", "Close Buffer" },
   ["p"] = { "<cmd>:Telescope neoclip<CR>", "neoclip" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-  ["<tab>"] = { "<cmd>:Buffers<CR>", "Buffers" },
-  ["<up>"] = { "<cmd>:Telescope buffers<CR>", "buffers" },
-  ["<down>"] = { "<C-^>", "buffers" },
-  ["<left>"] = { "<cmd>:BufferLineCyclePrev<CR>", "Pref buffer" },
+  ["<tab>"] = { "<cmd>:Buffers<CR>", "Buffers (fzf)" },
+  ["<up>"] = { "<cmd>:Telescope buffers<CR>", "Buffers (telescope)" },
+  ["<down>"] = { "<C-^>", "Prev buffer" },
+  ["<left>"] = { "<cmd>:BufferLineCyclePrev<CR>", "Prev buffer" },
   ["<right>"] = { "<cmd>:BufferLineCycleNext<CR>", "Next buffer" },
-  ["<PageDown>"] = { "<cmd>:Telescope oldfiles<CR>", "oldfiles" },
-  ["<home>"] = { "<cmd>:Telescope registers<CR>", "registers" },
-  ["<end>"] = { "<cmd>:Telescope marks<CR>", "marks" },
+  ["<PageDown>"] = { "<cmd>:Telescope oldfiles<CR>", "Oldfiles" },
+  ["<home>"] = { "<cmd>:Telescope registers<CR>", "Registers" },
+  ["<end>"] = { "<cmd>:Telescope marks<CR>", "Marks" },
 
   e = {
-     name = "explorer - nvim-tree",
+     name = "Explorer (nvim-tree)",
      w = {"<cmd>:NvimTreeFindFile<cr>","find file"},
      e = {"<cmd>:NvimTreeToggle<cr>","toggle"},
      },
   n = {
-     name = "line numbering",
+     name = "Line numbering",
      n = {"<cmd>:set number!<cr>","toggle line numbers"},
      r = {"<cmd>:set relativenumber!<cr>","toggle relative numbers"},
      },
@@ -129,9 +129,6 @@ wk.register({
     f = {"<cmd>lua require('telescope.builtin').find_files()<cr>",'Files'},
     d = {"<cmd>lua require('telescope.builtin').find_files({search_dirs={'%:p:h'}})<cr>",'Files fro buf'},
     e = {"<cmd>:Telescope file_browser path=%:p:h<cr>","file browser"},
-    -- nnoremap <leader>tgc <cmd>lua require('telescope.builtin').git_commits()<cr>
-    -- nnoremap <leader>fgr <cmd>lua require('telescope.builtin').git_branches()<cr>
-    -- nnoremap <leader>tfb <cmd>lua require('telescope.builtin').buffers()<cr>
     g = {"<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>","fuzzy grep buffer"},
     H = {"<cmd>lua require('telescope.builtin').command_history()<cr>","command history"},
     h = {"<cmd>lua require('telescope.builtin').search_history()<cr>","search history"},
@@ -157,29 +154,20 @@ wk.register({
     r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
     s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-    u = {
-      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-      "Undo Stage Hunk",
-    },
+    u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk", },
     o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-    C = {
-      "<cmd>Telescope git_bcommits<cr>",
-      "Checkout commit(for current file)",
-    },
-    d = {
-      "<cmd>Gitsigns diffthis HEAD<cr>",
-      "Git Diff",
-    },
-  f = {name = "fugitive",
-    g = {"<cmd>:Git status<cr>","Gstatus"},
-    c = {"<cmd>:Git commit<cr>","Gcommit"},
-    d = {"<cmd>:Git diff<cr>","Gdiff"},
-    l = {"<cmd>:Git log<cr>","Glog"},
-    p = {"<cmd>:Git pull<cr>","Gpull"},
-    u = {"<cmd>:Git push<cr>","Gpush"},
-    b = {"<cmd>:Git blame<cr>","Gblame"},
+    C = { "<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)", },
+    d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff", },
+    f = {name = "fugitive",
+        g = {"<cmd>:Git status<cr>","Gstatus"},
+        c = {"<cmd>:Git commit<cr>","Gcommit"},
+        d = {"<cmd>:Git diff<cr>","Gdiff"},
+        l = {"<cmd>:Git log<cr>","Glog"},
+        p = {"<cmd>:Git pull<cr>","Gpull"},
+        u = {"<cmd>:Git push<cr>","Gpush"},
+        b = {"<cmd>:Git blame<cr>","Gblame"},
      }
   },
   x = {
@@ -269,6 +257,7 @@ require("telescope").load_extension "file_browser"
 
 require('gitsigns').setup()
 
+--[[
 require'nvim-treesitter.configs'.setup({
   -- A list of parser names, or "all"
   ensure_installed = { "c", "lua", "rust", "python","javascript","typescript" },
@@ -311,6 +300,7 @@ require'nvim-treesitter.configs'.setup({
     additional_vim_regex_highlighting = false,
   },
 })
+]]--
 EOF
 
 
