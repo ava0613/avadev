@@ -41,6 +41,9 @@ colorscheme zenburn
 let mapleader=" "
 
 lua <<EOF
+local vim = vim
+local opt = vim.opt
+
 require("bufferline").setup{}
 require('lualine').setup()
 
@@ -257,17 +260,16 @@ require("telescope").load_extension "file_browser"
 
 require('gitsigns').setup()
 
---[[
 require'nvim-treesitter.configs'.setup({
   -- A list of parser names, or "all"
-  ensure_installed = { "c", "lua", "rust", "python","javascript","typescript" },
+  -- ensure_installed = { "c", "lua", "rust", "python","javascript","typescript" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+  -- sync_install = false,
 
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
+  -- auto_install = true,
 
   -- List of parsers to ignore installing (for "all")
   -- ignore_install = { "javascript" },
@@ -275,23 +277,26 @@ require'nvim-treesitter.configs'.setup({
   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
 
+  indent = {
+    enable = true,
+  },
   highlight = {
     -- `false` will disable the whole extension
-    enable = false,
+    enable = true,
 
     -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
     -- the name of the parser)
     -- list of language that will be disabled
-    disable = { "c", "rust" },
+    disable = { "vim" },
     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-    disable = function(lang, buf)
-        local max_filesize = 100 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-            return true
-        end
-    end,
+    -- disable = function(lang, buf)
+    --     local max_filesize = 100 * 1024 -- 100 KB
+    --     local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+    --     if ok and stats and stats.size > max_filesize then
+    --         return true
+    --     end
+    -- end,
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -300,11 +305,17 @@ require'nvim-treesitter.configs'.setup({
     additional_vim_regex_highlighting = false,
   },
 })
-]]--
+opt.foldmethod = "indent"
+--opt.foldmethod = "expr"
+--opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldenable = false
+
 EOF
 
+" ##############################################################
+" ##############################################################
 
-" autoclose - instead of some fancy plugin
+" #### autoclose - instead of some fancy plugin
 inoremap " ""<left>
 inoremap ' ''<left>
 inoremap ( ()<left>
@@ -313,7 +324,7 @@ inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
-
+" #### fzf
 set runtimepath+=~/.fzf
 let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.9 } }
 
@@ -324,14 +335,18 @@ let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbe
 \ctrl-h:preview-top,ctrl-e:preview-bottom,
 \alt-up:half-page-up,alt-up:half-page-down"
 
+" #### lazygit
 let g:lazygit_floating_window_winblend = 0 " transparency of floating window
 let g:lazygit_floating_window_scaling_factor = 0.96 " scaling factor for floating window
-let g:lazygit_floating_window_corner_chars = ['?', '?', '?', '?'] " customize lazygit popup window corner characters
+" let g:lazygit_floating_window_corner_chars = [' ', ' ', '.', '.'] " customize lazygit popup window corner characters
 let g:lazygit_floating_window_use_plenary = 0 " use plenary.nvim to manage floating window if available
 let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
 
 let g:lazygit_use_custom_config_file_path = 0 " config file path is evaluated if this value is 1
 let g:lazygit_config_file_path = '' " custom config file path
+
+" ##############################################################
+" #### nothing should be below this line, try to clean it up
 
 "set term-builtin_xterm
 "nmap <Ctrl-V><Del> x
