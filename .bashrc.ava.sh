@@ -52,7 +52,13 @@ curl -x 172.28.18.8:3128  -U res\\\\vasarhely1a613  info.cern.ch;
 echo 'curl -x 172.28.18.9:3128  -U res\\vasarhely1a613  info.cern.ch'; 
 curl -x 172.28.18.9:3128 -U res\\\\vasarhely1a613  info.cern.ch"
 
-export http_proxy=172.28.18.8:3128 
-export https_proxy=172.28.18.8:3128 
-export noproxy=svn.nis.t-mobile.intra
+nslookup directproxy.telekom.intra > /dev/null
+if [ $? -eq 0 ] ; then # proxy foun, we are in MT environment
+    export http_proxy=172.28.18.8:3128 
+    export https_proxy=172.28.18.8:3128 
+    export no_proxy=svn.nis.t-mobile.intra
+else
+    unset http_proxy https_proxy no_proxy
+fi
+
 
