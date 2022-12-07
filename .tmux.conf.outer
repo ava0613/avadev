@@ -1,8 +1,26 @@
-# outer tmux
+
+run-shell ~/.tmux/plugins/tmux-resurrect/resurrect.tmux
+set -g @resurrect-processes 'ssh'
+
+# leader outer tmux
 set-option -g prefix C-a
 unbind-key C-b
 bind-key C-a send-prefix
+unbind-key C-Space
 
+set -sg escape-time 0
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+# SESSION, WINDOWS
+set -g base-index 1 # window numbering from 1
+setw -g pane-base-index 1 # session numbering from 1 
+set-option -g history-limit 100000
+#
+bind S choose-tree
+set -g mouse off
+set-option -g allow-rename off
+
+# STATUS BAR
 set-option -g status-position top
 # Set status bar on
 set -g status on
@@ -60,15 +78,9 @@ set -g window-status-format ' #I #W '
 set -g window-status-current-style fg=black,bg=colour136
 set -g window-status-current-format ' #I #W '
 
-bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
 
-
-set -g base-index 1
-setw -g pane-base-index 1
-set-option -g history-limit 100000
-#
-bind S choose-tree
-
+# SESSION, WINDOW NAVIGATION
+# - the "-r" allows you to do PREFIX then hit several times the command bound
 
 # switch panes using Alt-arrow without prefix
 #bind -n M-Left select-pane -L
@@ -84,10 +96,34 @@ bind S choose-tree
 ##bind -n M-Right select-pane -R
 ##bind -n M-Up select-pane -U
 ##bind -n M-Down select-pane -D
-bind C-K switch-client -p
-bind C-J switch-client -n
-bind C-H previous-window
-bind C-L next-window
+#bind K switch-client -p
+#bind J switch-client -n
+#bind H previous-window
+#bind L next-window
 
+#unbind C-NPage
+#unbind C-PPage
+#bind -n C-PPage previous-window
+#bind -n C-NPage next-window
+#unbind C-A-Left
+#unbind C-A-Right
+#bind -n C-Up switch-client -p
+#bind -n C-Down switch-client -n
+#bind -n C-Left previous-window
+#bind -n C-Right next-window
+unbind -n C-Up
+unbind -n C-Down 
+unbind -n C-Left
+unbind -n C-Right 
+
+bind -n S-Up switch-client -p
+bind -n S-Down switch-client -n
+bind -n S-Left previous-window
+bind -n S-Right next-window
+
+#unbind M-Home
+#unbind M-End
+#bind -n M-Home switch-client -p
+#bind -n M-End switch-client -n
 
 
