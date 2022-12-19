@@ -70,11 +70,11 @@
   sz (tap-next s (layer-toggle lsz))
   msz (tap-macro s z)
 
-  hun (tap-next ralt (layer-toggle hun))
-  huc (tap-next ralt (layer-toggle huc))
+  ;;xx hun (tap-next ralt (layer-toggle hun))
+  ;;xx huc (tap-next ralt (layer-toggle huc))
 
-  shu (tap-next space (layer-toggle hun))
-  shc (tap-next space (layer-toggle huc))
+  hun (tap-next space (layer-toggle hun))
+  huc (tap-next space (layer-toggle huc))
 
 )
 
@@ -83,7 +83,8 @@
   @nav      q    w    e    r    t       y    u    i    o    p    [    ]    ret    home pgup end  kp+
   @lsy      a    s    d    f    g       h    j    k    l    ;    '    @nv2        del  up   pgdn 
   lsft lsft z    x    c    v    b       n    m    ,    .    /    rsft      up     left down rght kprt
-  lctl wkup lmet lalt           @shu              @lsy @nv1 rctl      left down   rght ins  del  
+  lctl wkup lmet lalt           @hun              ralt @nv1 rctl      left down   rght ins  del  
+;;lctl wkup lmet lalt           @shu              @lsy @nv1 rctl      left down   rght ins  del  
 )
 
 ;; extended layer for navigation
@@ -101,13 +102,6 @@
   _    _    _    _              bspc              _    _    _         _    _      _    _    _  
 )
 
-;;(deflayer navigation
-;;  _         f1   f2   f3   f4   f5      f6   f7   f8   f9   f10  f11  f12  bspc   _    _    _    _ 
-;;  _         escrsy  _    lsft _    XX      _    _    home pgdn pgup end  esc  ret    _    _    _    _ 
-;;  @bas      lsft _    _    lctl XX      _    _    left down up   rght XX          _    _    _       
-;;  _    _    @udo @cut @cpy @pst X        XX   del  ins  _    _    _         _      _    _    _    _ 
-;;  _    _    _    _              bspc              _    _    _         _    _      _    _    _  
-;;)
 
 ;;          q    w    e    r    t       y    u    i    o    p    [    ]    ret   
 ;;~`        !    @    #    $    %       ^    &    *    (    )    -_   =+   bck
@@ -122,24 +116,6 @@
   _    _    XX   XX   XX   XX   XX      _    \_   <    >    ?    rsft      _      _    _    _    _
   _    _    _    _              bspc              _    _    _         _    _      _    _    _     
 )
-
-;;(deflayer xsymbols
-;;  _         _    _    _    _    _       _    _    _    _    _    _    _    _
-;;  _         !    @    #    $    %       >    *    \(   \)   \    =    |    ret  
-;;  _         ~    /    ^    XX   &       =    +    [    ]    <    >    XX
-;;  _    _    `    XX   XX   XX   XX      <    -    {    }    /    rsft
-;;  _    _    _    _              \_             _    _    _
-;;)
-
-;;          q    w    e    r    t       y    u    i    o    p    [    ]    ret   
-;;caps      a    s    d    f    g       h    j    k    l    ;    '    \
-;;(deflayer numbers
-;;  _         _    _    _    _    _       _    _    _    _    _    _    _    _
-;;  _         _    _    _    _    XX      /    7    8    9    -    \(   \)   _  
-;;  _         _    _    _    _    XX      *    4    5    6    +    _    _
-;;  _    _    _    \(   \)   .    XX      0    1    2    3    _    _
-;;  _    _    _    _              _                 _    _    _
-;;)
 
 
 
@@ -173,29 +149,15 @@
 
 ;;          q    w    e    r    t    y    u    i    o    p    [    ]    ret   
 ;;caps      a    s    d    f    g    h    j    k    l    ;    '    \
-(deflayer hunxx
-  grv       _    _    _    _    _    _    _    _    _    ö    _    _    _         _    _    _    _
-  _         y    ü    é    _    _    _    _    í    ó    _    ő    _    _         _    _    _    _
-  _         á    _    _    _    _    _    _    _    _    ö    ú    _              _    _    _     
-  @huc _    _    ű    _    _    _    _    _    _    _    _    @huc      _         _    _    _    _
-  _    _    _    _              _              _    _    _         _    _         _    _    _     
-)
 (deflayer hun
-  grv       ű    á    é    ü    _    _    _    ú    í    ó    ö    _    _         _    _    _    _
+  grv       ű    á    ó    ö    _    _    _    ú    í    ö     _    _    _         _    _    _    _
   _         y    ü    _    _    _    _    _    _    _    _    ő   _    _         _    _    _    _
-  _         _    _    _    _    _    _    _    _    _    _    _    _              _    _    _     
+  _         _    _    _    _    _    _    _    _    _    é     _    _              _    _    _     
   @huc _    _    _    _    _    _    _    _    _    _    _    @huc      _         _    _    _    _
   _    _    _    _              _              _    _    _         _    _         _    _    _     
 )
 
 
-(deflayer hucxx
-  _         _    _    _    _    _    _    _    _    _    _    _    _    _         _    _    _    _
-  _         _    @cau É    _    _    _    _    Í    Ö    _    Ő    _    _         _    _    _    _
-  _         Á    _    _    _    _    _    _    _    _    Ó    @cuu _              _    _    _     
-  _    _    _    @ceu _    _    _    _    _    _    _    _    _         _         _    _    _    _
-  _    _    _    _              _              _    _    _         _    _         _    _    _     
-)
 (deflayer huc
   _         @ceu Á    É    @cau _    _    _    @cuu Í    Ó    Ö    _    _         _    _    _    _
   _         _    _    _    _    _    _    _    _    _    _    _    _    _         _    _    _    _
