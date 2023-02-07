@@ -35,6 +35,8 @@ call plug#end()
 set termguicolors
 let $COLORTERM='gnome-terminal'
 colorscheme zenburn
+hi Visual  guifg=None guibg=Black gui=none
+hi Search  guifg=Black guibg=LightYellow gui=none
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline_theme = 'lucius'
 

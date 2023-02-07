@@ -37,9 +37,11 @@ do
            echo
         fi
     elif [ "$action" == "dispatch" ]; then
-        echo "cp "$localf" "$remotef
+        echo "cp $localf $remotef"
+        cp $localf $remotef
     elif [ "$action" == "collect" ]; then
-        echo "cp "$localf" "$remotef
+        echo "cp $remotef $localf" 
+        cp $remotef $localf
     else
         echo "unrecognized action"
     fi
