@@ -335,6 +335,14 @@ inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
+" #### keep current line in the middle of the screnn when moving half page or
+" searching
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-d>zz
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+
 " #### fzf
 set runtimepath+=~/.fzf
 let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.9 } }
