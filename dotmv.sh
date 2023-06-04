@@ -2,8 +2,9 @@
 items=( 
     "t nvim/plug.vim $HOME/.local/share/nvim/site/autoload/plug.vim" 
     "t nvim/init.vim $HOME/.config/nvim/init.vim"
+    # "d nvim/lua $HOME/.config/nvim/lua"
     "t .bashrc.ava.sh $HOME/.bashrc.ava.sh"
-    "b nvim/nvim.appimage $HOME/.local/bin/nvim/nvim.appimage" 
+    "b nvim/nvim.appimage $HOME/.local/bin/nvim.appimage" 
     )
 
 action=$1
