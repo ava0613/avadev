@@ -1,20 +1,19 @@
 call plug#begin()
 
-""Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-" Plug 'https://github.com/vim-airline/vim-airline.git'
-" Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 " statusline, and icons
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-
 Plug 'akinsho/bufferline.nvim'
+
+
 Plug 'kdheepak/lazygit.nvim'
 Plug 'https://tpope.io/vim/commentary.git'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons' " for nvim-tree icons
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'flazz/vim-colorschemes'
+Plug 'rose-pine/neovim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'folke/which-key.nvim'  "menu for leader
@@ -23,10 +22,29 @@ Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
-"Plug 'xolox/vim-session'
-"Plug 'itchyny/lightline.vim'
-"Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'phaazon/hop.nvim'
+"
+" LSP0 >>>>>>>>>>>>>>   
+" LSP Support
+Plug 'neovim/nvim-lspconfig'                           " Required
+Plug 'williamboman/mason.nvim', {'do': ':MasonUpdate'} " Optional
+Plug 'williamboman/mason-lspconfig.nvim'               " Optional
+
+" Autocompletion
+Plug 'hrsh7th/nvim-cmp'         " Required
+Plug 'hrsh7th/cmp-nvim-lsp'     " Required
+Plug 'L3MON4D3/LuaSnip'         " Required
+
+Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
+" <<<<<<<<<<<<<< LSP0
+
+" kept for ref,tried them out, didn't like,became obsolate'
+" Plug 'xolox/vim-session'
+" Plug 'airblade/vim-gitgutter'
+" Plug 'https://github.com/vim-airline/vim-airline.git'
+" Plug 'https://github.com/vim-airline/vim-airline-themes.git'
+" Plug 'itchyny/lightline.vim'
 call plug#end()
 
 
@@ -43,297 +61,30 @@ hi Search  guifg=Black guibg=LightYellow gui=none
 let mapleader=" "
 
 lua <<EOF
-local vim = vim
-local opt = vim.opt
-
-require("bufferline").setup{}
-require('lualine').setup()
-
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.nvim_tree_width = 50
-vim.g.nvim_tree_gitignore = 1 
-vim.g.nvim_tree_indent_markers = 1 
---require("nvim-tree").setup({
-require"nvim-tree".setup {
---    auto_open=1,
---    auto_close=1
-  sort_by = "case_sensitive",
-  view = {
-    --adaptive_size = true,
-    width = 50,
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
-      },
-    },
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = false,
-  },
-}
-
-
-local wk = require("which-key")
---.setup {
--- your configuration comes here
--- or leave it empty to use the default settings
--- refer to the configuration section below
---}
--- wk.register(mappings,  {
---     n = {
---         name = "line numbering",
---         a = {"<cmd>:set relativenumber!<cr>","toggle"}
---         }
---       }, { prefix = "<leader>" })
-wk.register({
-  ["w"] = { "<cmd>w!<CR>", "Save" },
-  ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Quit" },
-  -- ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
-  ["/"] = { "<cmd>:Commentary<cr>","Comment toggle" },
-  ["c"] = { "<cmd>:bd<CR>", "Close Buffer" },
-  ["p"] = { "<cmd>:Telescope neoclip<CR>", "neoclip" },
-  ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-  ["<tab>"] = { "<cmd>:Buffers<CR>", "Buffers (fzf)" },
-  ["<up>"] = { "<cmd>:Telescope buffers<CR>", "Buffers (telescope)" },
-  ["<down>"] = { "<C-^>", "Prev buffer" },
-  ["<left>"] = { "<cmd>:BufferLineCyclePrev<CR>", "Prev buffer" },
-  ["<right>"] = { "<cmd>:BufferLineCycleNext<CR>", "Next buffer" },
-  ["<PageDown>"] = { "<cmd>:Telescope oldfiles<CR>", "Oldfiles" },
-  ["<home>"] = { "<cmd>:Telescope registers<CR>", "Registers" },
-  ["<end>"] = { "<cmd>:Telescope marks<CR>", "Marks" },
-
-  e = {
-     name = "Explorer (nvim-tree)",
-     w = {"<cmd>:NvimTreeFindFile<cr>","find file"},
-     e = {"<cmd>:NvimTreeToggle<cr>","toggle"},
-     },
-  n = {
-     name = "Line numbering",
-     n = {"<cmd>:set number!<cr>","toggle line numbers"},
-     r = {"<cmd>:set relativenumber!<cr>","toggle relative numbers"},
-     },
-  f = {
-     name = "Find with fzf",
-     f = {"<cmd>:Files<cr>","Files"},
-     d = {"<cmd>:Files %:p:h<cr>","files in buffer's dir"},
-     b = {"<cmd>:Buffers<cr>","buffers"},
-     g = {
-         name = "git",
-         s = {"<cmd>:GFiles?<cr>","GFiles"},
-         b = {"<cmd>:BCommits<cr>","BCommits"},
-         c = {"<cmd>:Commits<cr>","Commits"},
-         f = {"<cmd>:GitFiles<cr>","GitFiles"},
-         }
-     },
-  t = {name = 'Telescope',
-    
-    f = {"<cmd>lua require('telescope.builtin').find_files()<cr>",'Files'},
-    d = {"<cmd>lua require('telescope.builtin').find_files({search_dirs={'%:p:h'}})<cr>",'Files fro buf'},
-    e = {"<cmd>:Telescope file_browser path=%:p:h<cr>","file browser"},
-    g = {"<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>","fuzzy grep buffer"},
-    H = {"<cmd>lua require('telescope.builtin').command_history()<cr>","command history"},
-    h = {"<cmd>lua require('telescope.builtin').search_history()<cr>","search history"},
-    o = {"<cmd>lua require('telescope.builtin').oldfiles()<cr>","oldfiles"},
--- nnoremap <leader>tC <cmd>lua require('telescope.builtin').commands()<cr>
---nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-      },
-  v = {
-     name = "Nvim config",
-     e = {"<cmd>:e $MYVIMRC<cr>","edit init.vim"},
-     s = {"<cmd>:source $MYVIMRC<cr>","source init.vim"},
-     o = { "<cmd>Telescope colorscheme<cr>", "colorcheme /telesope" },
-  },
-  g = {
-    name = "Git",
-    g = {"<cmd>:LazyGit<cr>","lz for the project"},
-    --g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
-    h = {"<cmd>:LazyGitFilterCurrentFile<cr>","lz for the buffer"},
-    j = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
-    k = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
-    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-    s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-    u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk", },
-    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-    C = { "<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)", },
-    d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff", },
-    f = {name = "fugitive",
-        g = {"<cmd>:Git status<cr>","Gstatus"},
-        c = {"<cmd>:Git commit<cr>","Gcommit"},
-        d = {"<cmd>:Git diff<cr>","Gdiff"},
-        l = {"<cmd>:Git log<cr>","Glog"},
-        p = {"<cmd>:Git pull<cr>","Gpull"},
-        u = {"<cmd>:Git push<cr>","Gpush"},
-        b = {"<cmd>:Git blame<cr>","Gblame"},
-     }
-  },
-  x = {
-    name = "xdemo", -- optional group name
-    f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
-    r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap=false, buffer = 1} , -- adritional options for creating the keymap
-    n = { "New File" }, -- just a label. don't create any mapping
-    e = "Edit File", -- same as above
-    ["1"] = "which_key_ignore",  -- special label to hide it in the popup
-    b = { function() print("bar") end, "Foobar" } -- you can also pass functions!
-  },
-}, { prefix = "<leader>" })
-
-
-
-require "neoclip".setup {
-    -- {'kkharji/sqlite.lua', module = 'sqlite'},
-    -- you'll need at least one of these
-    -- {'nvim-telescope/telescope.nvim'},
-    -- {'ibhagwan/fzf-lua'},
-  }
-
-
-local actions = require('telescope.actions')
-require "telescope".setup {
-    defaults = {
-      --prompt_prefix = lvim.icons.ui.Telescope .. " ",
-      --selection_caret = lvim.icons.ui.Forward .. " ",
-      entry_prefix = "  ",
-      initial_mode = "insert",
-      selection_strategy = "reset",
-      sorting_strategy = "descending",
-      layout_strategy = "horizontal",
-      layout_config = {
-        width = 0.95,
-        height = 0.95,
-        preview_cutoff = 120,
-        horizontal = {
-          preview_width = function(_, cols, _)
-            if cols < 120 then
-              return math.floor(cols * 0.5)
-            end
-            return math.floor(cols * 0.6)
-          end,
-          mirror = false,
-        },
-        vertical = { mirror = false },
-      },
-      vimgrep_arguments = {
-        "rg",
-        "--color=never",
-        "--no-heading",
-        "--with-filename",
-        "--line-number",
-        "--column",
-        "--smart-case",
-        "--hidden",
-        "--glob=!.git/",
-      },
-    mappings = {
-        i = {
-          ["<C-n>"] = actions.move_selection_next,
-          ["<C-p>"] = actions.move_selection_previous,
-          ["<C-c>"] = actions.close,
-          ["<C-j>"] = actions.cycle_history_next,
-          ["<C-k>"] = actions.cycle_history_prev,
-          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-          ["<CR>"] = actions.select_default,
-          ["<PageUp>"] = actions.preview_scrolling_up,  -- custom override pgup,pgdown
-          ["<PageDown>"] = actions.preview_scrolling_down,  -- custom override pgup,pgdown
-        },
-        n = {
-          ["<C-n>"] = actions.move_selection_next,
-          ["<C-p>"] = actions.move_selection_previous,
-          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-        },
-      },
-    },
-  pickers = {
-    colorscheme = {
-      enable_preview = true
-    }
-  }
-}
-require('telescope').load_extension('neoclip')
-require("telescope").load_extension "file_browser"
-
-require('gitsigns').setup()
-
-require'nvim-treesitter.configs'.setup({
-  -- A list of parser names, or "all"
-  -- ensure_installed = { "c", "lua", "rust", "python","javascript","typescript" },
-
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  -- sync_install = false,
-
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  -- auto_install = true,
-
-  -- List of parsers to ignore installing (for "all")
-  -- ignore_install = { "javascript" },
-
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-  indent = {
-    enable = true,
-  },
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = true,
-
-    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
-    -- list of language that will be disabled
-    disable = { "vim" },
-    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-    -- disable = function(lang, buf)
-    --     local max_filesize = 100 * 1024 -- 100 KB
-    --     local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-    --     if ok and stats and stats.size > max_filesize then
-    --         return true
-    --     end
-    -- end,
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = {
-  enable = true,
-  keymaps = {
-    init_selection = "<cr>",
-    node_incremental = "<cr>",
-    scope_incremental = "grc",
-    node_decremental = "<backspace>",
-  }
-}
-})
-opt.foldmethod = "indent"
---opt.foldmethod = "expr"
---opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldenable = false
-
+print("hello from init.vim")
+-- require('init_ava')
+require('ava')
 EOF
 
-" ##############################################################
-" ##############################################################
+" LEGACY - all worthy was moved to lua
+""set t_Co=256
+""set term='xterm-256color'
+"set termguicolors
+"set list lcs=trail:·,tab:»·
+"" ¬ →  ⤦  ↩  
+"set list lcs=tab:»·,eol:¬
+"let $COLORTERM='gnome-terminal'
+"colorscheme zenburn
 
-" #### autoclose - instead of some fancy plugin
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
+" let mapleader=" "
+" autoclose - instead of some fancy plugin
+" inoremap " ""<left>
+" inoremap ' ''<left>
+" inoremap (( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>O
+" inoremap {;<CR> {<CR>};<ESC>O
 
 " #### keep current line in the middle of the screnn when moving half page or
 " searching
@@ -347,25 +98,24 @@ nnoremap N Nzzzv
 set runtimepath+=~/.fzf
 let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.9 } }
 
-let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}'
-\ --bind ctrl-p:preview-up,ctrl-n:preview-down,
-\ctrl-b:preview-page-up,ctrl-f:preview-page-down,
-\ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,
-\ctrl-h:preview-top,ctrl-e:preview-bottom,
-\alt-up:half-page-up,alt-up:half-page-down"
+" set runtimepath+=~/.fzf
+" let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.9 } }
 
-" #### lazygit
-let g:lazygit_floating_window_winblend = 0 " transparency of floating window
-let g:lazygit_floating_window_scaling_factor = 0.96 " scaling factor for floating window
-" let g:lazygit_floating_window_corner_chars = [' ', ' ', '.', '.'] " customize lazygit popup window corner characters
-let g:lazygit_floating_window_use_plenary = 0 " use plenary.nvim to manage floating window if available
-let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
+" let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}'
+" \ --bind ctrl-p:preview-up,ctrl-n:preview-down,
+" \ctrl-b:preview-page-up,ctrl-f:preview-page-down,
+" \ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,
+" \ctrl-h:preview-top,ctrl-e:preview-bottom,
+" \alt-up:half-page-up,alt-up:half-page-down"
 
-let g:lazygit_use_custom_config_file_path = 0 " config file path is evaluated if this value is 1
-let g:lazygit_config_file_path = '' " custom config file path
+" let g:lazygit_floating_window_winblend = 0 " transparency of floating window
+" let g:lazygit_floating_window_scaling_factor = 0.96 " scaling factor for floating window
+" let g:lazygit_floating_window_corner_chars = ['?', '?', '?', '?'] " customize lazygit popup window corner characters
+" let g:lazygit_floating_window_use_plenary = 0 " use plenary.nvim to manage floating window if available
+" let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
 
-" ##############################################################
-" #### nothing should be below this line, try to clean it up
+" let g:lazygit_use_custom_config_file_path = 0 " config file path is evaluated if this value is 1
+" let g:lazygit_config_file_path = '' " custom config file path
 
 "set term-builtin_xterm
 "nmap <Ctrl-V><Del> x
@@ -381,6 +131,7 @@ let g:lazygit_config_file_path = '' " custom config file path
 "let g:netrw_altv = 1
 "nnoremap <leader>dd :Lexplore %:p:h<CR> "open netrw in dir of current file
 "nnoremap <Leader>da :Lexplore<CR> "open netrw in the dir where vim started
+" nnoremap f :HopChar1<CR> "find with hop
 "function! NetrwMapping()
 "  nmap <buffer> H u
 "  nmap <buffer> h -^
@@ -424,9 +175,9 @@ let g:lazygit_config_file_path = '' " custom config file path
 " nnoremap <leader>gc :Commits<cr>
 " nnoremap <leader>gf :GitFiles<cr>
 
-nnoremap <leader>hh :History<cr>
-nnoremap <leader>hc :History:<cr>
-nnoremap <leader>hs :History/<cr>
+" nnoremap <leader>hh :History<cr>
+" nnoremap <leader>hc :History:<cr>
+" nnoremap <leader>hs :History/<cr>
 
 
 " nnoremap <leader>gg :LazyGit<cr>
@@ -466,27 +217,27 @@ nnoremap <leader>hs :History/<cr>
 "<leader> - b - d :	Delete current buffer
 
 
-set nocompatible            " disable compatibility to old-time vi
-set showmatch               " show matching 
-set ignorecase              " case insensitive 
-set mouse=v                 " middle-click paste with 
-set hlsearch                " highlight search 
-set incsearch               " incremental search
-set tabstop=4               " number of columns occupied by a tab 
-set softtabstop=4           " see multiple spaces as tabstops so <BS> does the right thing
-set expandtab               " converts tabs to white space
-set shiftwidth=4            " width for autoindents
-set autoindent              " indent a new line the same amount as the line just typed
-set number                  " add line numbers
-"set number relativenumber
-"set wildmode=longest,list   " get bash-like tab completions
-set cc=80                  " set an 80 column border for good coding style
-filetype plugin indent on   "allow auto-indenting depending on file type
-syntax on                   " syntax highlighting
-"set mouse=a                 " enable mouse click
-set clipboard=unnamedplus   " using system clipboard
-set cursorline              " highlight current cursorline
-set ttyfast                 " Speed up scrolling in Vim
+"set nocompatible            " disable compatibility to old-time vi
+"set showmatch               " show matching 
+"set ignorecase              " case insensitive 
+"set mouse=v                 " middle-click paste with 
+"set hlsearch                " highlight search 
+"set incsearch               " incremental search
+"set tabstop=4               " number of columns occupied by a tab 
+"set softtabstop=4           " see multiple spaces as tabstops so <BS> does the right thing
+"set expandtab               " converts tabs to white space
+"set shiftwidth=4            " width for autoindents
+"set autoindent              " indent a new line the same amount as the line just typed
+"set number                  " add line numbers
+""set number relativenumber
+""set wildmode=longest,list   " get bash-like tab completions
+"set cc=80                  " set an 80 column border for good coding style
+"filetype plugin indent on   "allow auto-indenting depending on file type
+"syntax on                   " syntax highlighting
+""set mouse=a                 " enable mouse click
+"set clipboard=unnamedplus   " using system clipboard
+"set cursorline              " highlight current cursorline
+"set ttyfast                 " Speed up scrolling in Vim
 " set spell                 " enable spell check (may need to download language package)
 " set noswapfile            " disable creating swap file
 " set backupdir=~/.cache/vim " Directory to store backup files.
@@ -509,73 +260,73 @@ set ttyfast                 " Speed up scrolling in Vim
 "Ctrl - d :	Scroll down through documentation menu.
 ":	Confirm completion.
 
-set encoding=utf-8
+" set encoding=utf-8
 
 "fonts for airline
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-" unicode symbols
-"let g:airline_left_sep = '»'
-"let g:airline_left_sep = '▶'
-let g:airline_left_sep = ''
-"let g:airline_left_sep = "\ue602"
-"let g:airline_right_sep = '«'
-"let g:airline_right_sep = '◀'
-let g:airline_right_sep = ''
-let g:airline_symbols.crypt = '🔒'
-"let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.maxlinenr = ''
-"let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ' "press ga on a char to get its hexa
-let g:airline_symbols.readonly = ''
-" unicode symbols
-"let g:airline_left_sep = "\u00bb"
-"let g:airline_left_sep = "\u25b6"
-"let g:airline_right_sep = "\u00ab"
-"let g:airline_right_sep = "\u25c0"
-"let g:airline_symbols.crypt = "\u0001f512"
-"let g:airline_symbols.linenr = "\u240a"
-"let g:airline_symbols.linenr = "\u2424"
-"let g:airline_symbols.linenr = "\u00b6"
-"let g:airline_symbols.branch = "\u2387"
-"let g:airline_symbols.paste = "\u03c1"
-"let g:airline_symbols.paste = "\u00de"
-"let g:airline_symbols.paste = "\u2225"
-"let g:airline_symbols.whitespace = "\u039e"
-" "" powerline symbols
-"let g:airline_left_sep = ''
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_sep = ''
-"let g:airline_right_alt_sep = ''
-"let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-"let g:airline_symbols.linenr = ''
-" let g:airline_left_sep ="\ue0b0" 
-"let g:airline_left_alt_sep = "\ue0b1"
-"let g:airline_right_sep = "\ue0b2"
-"let g:airline_right_alt_sep = "\ue0b3"
-"let g:airline_symbols.branch = "\ue0a0"
-"let g:airline_symbols.readonly = "\ue0a2"
-"let g:airline_symbols.linenr = "\ue0a1"
-" "" old vim-powerline symbols
-"let g:airline_left_sep = '⮀'
-"let g:airline_left_alt_sep = '⮁'
-"let g:airline_right_sep = '⮂'
-"let g:airline_right_alt_sep = '⮃'
-"let g:airline_symbols.branch = '⭠'
-"let g:airline_symbols.readonly = '⭤'
-"let g:airline_symbols.linenr = '⭡'
-" let g:airline_symbols.space = "\ua0"
-"let g:airline_theme='powerlineish'
-"let g:airline_theme='molokai' 
-"let g:airline_left_sep='<'
-"let g:airline_right_sep='>'
-"let g:airline_section_z='#' 
+"let g:airline_powerline_fonts = 1
+"if !exists('g:airline_symbols')
+"    let g:airline_symbols = {}
+"endif
+"" unicode symbols
+""let g:airline_left_sep = '»'
+""let g:airline_left_sep = '▶'
+"let g:airline_left_sep = ''
+""let g:airline_left_sep = "\ue602"
+""let g:airline_right_sep = '«'
+""let g:airline_right_sep = '◀'
+"let g:airline_right_sep = ''
+"let g:airline_symbols.crypt = '🔒'
+""let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.maxlinenr = ''
+""let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+"let g:airline_symbols.whitespace = 'Ξ' "press ga on a char to get its hexa
+"let g:airline_symbols.readonly = ''
+"" unicode symbols
+""let g:airline_left_sep = "\u00bb"
+""let g:airline_left_sep = "\u25b6"
+""let g:airline_right_sep = "\u00ab"
+""let g:airline_right_sep = "\u25c0"
+""let g:airline_symbols.crypt = "\u0001f512"
+""let g:airline_symbols.linenr = "\u240a"
+""let g:airline_symbols.linenr = "\u2424"
+""let g:airline_symbols.linenr = "\u00b6"
+""let g:airline_symbols.branch = "\u2387"
+""let g:airline_symbols.paste = "\u03c1"
+""let g:airline_symbols.paste = "\u00de"
+""let g:airline_symbols.paste = "\u2225"
+""let g:airline_symbols.whitespace = "\u039e"
+"" "" powerline symbols
+""let g:airline_left_sep = ''
+""let g:airline_left_alt_sep = ''
+""let g:airline_right_sep = ''
+""let g:airline_right_alt_sep = ''
+""let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+""let g:airline_symbols.linenr = ''
+"" let g:airline_left_sep ="\ue0b0" 
+""let g:airline_left_alt_sep = "\ue0b1"
+""let g:airline_right_sep = "\ue0b2"
+""let g:airline_right_alt_sep = "\ue0b3"
+""let g:airline_symbols.branch = "\ue0a0"
+""let g:airline_symbols.readonly = "\ue0a2"
+""let g:airline_symbols.linenr = "\ue0a1"
+"" "" old vim-powerline symbols
+""let g:airline_left_sep = '⮀'
+""let g:airline_left_alt_sep = '⮁'
+""let g:airline_right_sep = '⮂'
+""let g:airline_right_alt_sep = '⮃'
+""let g:airline_symbols.branch = '⭠'
+""let g:airline_symbols.readonly = '⭤'
+""let g:airline_symbols.linenr = '⭡'
+"" let g:airline_symbols.space = "\ua0"
+""let g:airline_theme='powerlineish'
+""let g:airline_theme='molokai' 
+""let g:airline_left_sep='<'
+""let g:airline_right_sep='>'
+""let g:airline_section_z='#' 
 
