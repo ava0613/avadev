@@ -48,18 +48,6 @@ Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
 call plug#end()
 
 
-"set t_Co=256
-"set term='xterm-256color'
-set termguicolors
-let $COLORTERM='gnome-terminal'
-colorscheme zenburn
-hi Visual  guifg=None guibg=Black gui=none
-hi Search  guifg=Black guibg=LightYellow gui=none
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline_theme = 'lucius'
-
-let mapleader=" "
-
 lua <<EOF
 print("hello from init.vim")
 -- require('init_ava')
@@ -86,17 +74,6 @@ EOF
 " inoremap {<CR> {<CR>}<ESC>O
 " inoremap {;<CR> {<CR>};<ESC>O
 
-" #### keep current line in the middle of the screnn when moving half page or
-" searching
-nnoremap <C-d> <C-d>zz
-nnoremap <C-u> <C-d>zz
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-
-" #### fzf
-set runtimepath+=~/.fzf
-let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.9 } }
 
 " set runtimepath+=~/.fzf
 " let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.9 } }

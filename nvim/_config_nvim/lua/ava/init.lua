@@ -13,6 +13,11 @@ vim.keymap.set('i','{{', '{}<left>')
 -- inoremap {<CR> {<CR>}<ESC>O
 -- inoremap {;<CR> {<CR>};<ESC>O
 
+-- keep current line in the middle of the screnn when moving half page or " searching↲
+vim.keymap.set('n','<C-d>',' <C-d>zz')
+vim.keymap.set('n','<C-u>',' <C-d>zz')
+vim.keymap.set('n','n','nzzzv')
+vim.keymap.set('n','N','Nzzzv')
 
 ----------------------------------------------------------------
 -- SETS
@@ -82,7 +87,8 @@ vim.opt.wrap = false
 
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
-
+vim.cmd('hi Visual  guifg=None guibg=Black gui=none')
+vim.cmd('hi Search  guifg=Black guibg=LightYellow gui=none')
 
 vim.opt.scrolloff = 8   -- keep at least 8 rows at the top/bottom when scrolling
 vim.opt.signcolumn = "yes"
