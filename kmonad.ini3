@@ -81,7 +81,7 @@
 (deflayer base
   esc       1    2    3    4    5       6    7    8    9    0    -    =    bspc   nlck kp/  kp*  esc
   @nav      q    w    e    r    t       y    u    i    o    p    [    ]    ret    del  pgdn pgup bspc
-  @lsy      a    s    d    f    g       h    j    k    l    ;    '    @nv2        home up   end 
+  lctl      a    s    d    f    g       h    j    k    l    ;    '    @nv2        home up   end
   lsft lsft z    x    c    v    b       n    m    ,    .    /    rsft      up     left down rght kprt
   lctl wkup lmet lalt           @hun              ralt @nv1 rctl      left down   rght ins  del  
 ;;lctl wkup lmet lalt           @shu              @lsy @nv1 rctl      left down   rght ins  del  
@@ -96,8 +96,8 @@
   )
 (deflayer navigation
   _         f1   f2   f3   f4   f5      f6   f7   _    del  pgdn pgup f12  bspc   _    _    _    _ 
-  _         esc  lsft lctl _    XX      _    _    home up   end  _     _    ret    _    _    _    _ 
-  @bas      _    _    _    lalt XX      _    _    left down rght _     _           _    _    _       
+  _         ~    lsft lctl _    XX      _    _    home up   end  \(   \)    ret    _    _    _    _
+  @bas      `    _    _    lalt XX      _    _    left down rght _     _           _    _    _
   _    _    @udo @cut @cpy @pst XX      XX   del  pgup XX   pgdn ins   _      _    _    _    _
   _    _    _    _              bspc              _    _    _          _    _      _    _    _  
 )
