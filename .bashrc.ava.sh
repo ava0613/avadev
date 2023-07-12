@@ -12,7 +12,6 @@ alt-up:half-page-up,alt-up:half-page-down"
 alias fff="fzf --bind 'enter:execute(nvim.appimage {})'"
 
 alias cdava='cd '$HOME'/work/avadev'
-alias cdd='cd '$HOME'/work/avadev'
 
 ### lazygit
 alias llg='lazygit'                                                              
