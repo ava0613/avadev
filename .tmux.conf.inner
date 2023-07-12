@@ -63,7 +63,8 @@ set -g status-right "#[fg=green,bg=default,bright] #[default]"
 set -ag status-right "#[fg=cyan,bg=default] #H #[default]"
 
 # Display the time
-set -ag status-right "#[fg=colour172,bright,bg=default] ⌚︎%Y-%m-%d %H:%M %p #[default]"
+#set -ag status-right "#[fg=colour172,bright,bg=default]⌚︎%Y-%m-%d %H:%M %p #[default]"
+set -ag status-right "#[fg=colour172,bright,bg=default] %Y-%m-%d %H:%M %p #[default]"
 
 # Set the inactive window color and style
 set -g window-status-style fg=colour244,bg=default
@@ -75,10 +76,15 @@ set -g window-status-current-format ' #I #W '
 
 # NAVIGATE sessions, windows, panes
 # switch panes using Alt-arrow without prefix
-bind -n M-Left previous-window
-bind -n M-Right next-window
-bind -n M-Up switch-client -p
-bind -n M-Down switch-client -n
+#unbind -n C-left
+#unbind -n C-right
+#unbind -n C-up
+#unbind -n C-down
+
+bind -n M-left previous-window
+bind -n M-right next-window
+bind -n M-up switch-client -p
+bind -n M-down switch-client -n
 
 #bind -n M-Left select-pane -L
 #bind -n M-Right select-pane -R
