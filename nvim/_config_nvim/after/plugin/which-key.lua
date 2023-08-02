@@ -13,6 +13,9 @@ local wk = require("which-key")
 --         }
 --       }, { prefix = "<leader>" })
 wk.register({
+  ["a"] = { "<cmd>HopLineStart<CR>", "HopLineStart" },
+  ["z"] = { "<cmd>HopPattern<CR>", "HopPattern " },
+  ["d"] = { "<cmd>HopWord<CR>", "HopWord" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Quit" },
   -- ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
@@ -64,6 +67,8 @@ wk.register({
     H = {"<cmd>lua require('telescope.builtin').command_history()<cr>","command history"},
     h = {"<cmd>lua require('telescope.builtin').search_history()<cr>","search history"},
     o = {"<cmd>lua require('telescope.builtin').oldfiles()<cr>","oldfiles"},
+    q = {"<cmd>lua require('telescope.builtin').quickfix()<cr>","quickfix"},
+    Q = {"<cmd>lua require('telescope.builtin').quickfixhistory()<cr>","quickfix"},
 -- nnoremap <leader>tC <cmd>lua require('telescope.builtin').commands()<cr>
 --nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
       },
