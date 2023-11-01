@@ -278,11 +278,13 @@ AppsKey & PgUp::MoveCursor("{PgUp}")  ;;
 ;##### numpad navigation
 
 NumpadEnd::LEFT 
-NumpadDown::SendPlay, {DOWN}
+NumpadPgDn::RIGHT
+
+# Up and Down aer more tricky because of onenote and vnc
+NumpadDown::SendPlay, {DOWN}  ; not working in vnc
+LShift & NumpadDown::SendPlay, {Shift down}{DOWN}{Shift up} ; beacause of onenote
 NumpadClear::SendPlay, {UP}
 LShift & NumpadClear::SendPlay, {Shift down}{UP}{Shift up} ; beacause of onenote
-;NumpadPgDn::RIGHT
-NumpadPgDn::RIGHT
 
 NumpadHome::Home
 NumpadPgUp::End
@@ -491,7 +493,7 @@ Space::Send, {Space}
 Space & SC002::Send, ű        ; 1
 Space & SC003::Send, á        ; 2
 Space & SC004::Send, ó        ; 3
-;Space & SC005::Send, ó        ; 4
+Space & SC005::Send, ű        ; 4
 Space & w::Send, ü        ; 
 Space & q::Send, y        ; 
 ;--
@@ -506,7 +508,7 @@ Space & SC027::Send, é        ; ; - ori hu place
 	Space & SC002::Send, Ű        ; 1
 	Space & SC003::Send, Á        ; 2
 	Space & SC004::Send, Ó        ; 3
-	;Space & SC005::Send, Ó        ; 4
+	Space & SC005::Send, Ű        ; 4
 	Space & w::Send, Ü        ; 
 	Space & q::Send, Y        ; 
 	;--

@@ -24,7 +24,7 @@ alias llh='lazygit_filtered'
 
 alias cdw='cd ~/work'
 
-
+alias mc='mc -S modarin256.ini'
 
 ###########
 # ATOM stuff
