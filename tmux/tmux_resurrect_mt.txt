@@ -1,58 +1,75 @@
-pane	0_conf	0	1	:*	1	:/home/smix/avadev	1	bash	:
-pane	0_conf	0	1	:*	2	:/home2/smix/avadev\ (deleted)	0	bash	:
-pane	11_atomDEV	1	0	:	1	:/home2/smix\ (deleted)	1	bash	:
-pane	11_atomDEV	3	0	:	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh -t avasarhely@ncsmixtst.t-mobile.intra
-pane	11_atomDEV	4	0	:	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh -t avasarhely@atom2204.telekom.intra
-pane	11_atomDEV	5	1	:*	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh -t avasarhely@ncsmixtst.t-mobile.intra
-pane	11_atomDEV	6	0	:-	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh -t avasarhely@ncsmixtst.t-mobile.intra
-pane	11_atomDEV	7	0	:	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh -t avasarhely@ncsmixtst.t-mobile.intra
-pane	12_atomSTAGE	1	0	:	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh avasarhely@atom2101
-pane	12_atomSTAGE	2	1	:*	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh avasarhely@atom2204
-pane	12_atomSTAGE	3	0	:-	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh -t avasarhely@atom2203.telekom.intra
-pane	12_atomSTAGE	4	0	:	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh -t avasarhely@atom2201.telekom.intra
-pane	13_atomPROD	1	0	:	1	:/home2/smix/avadev\ (deleted)	1	bash	:
-pane	13_atomPROD	2	1	:*	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh -t avasarhely@atom1205.telekom.intra
-pane	13_atomPROD	3	0	:-	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh -t avasarhely@atom1204.telekom.intra
-pane	13_atomPROD	4	0	:	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh -t avasarhely@atom1102.telekom.intra
-pane	13_atomPROD	5	0	:	1	:/home2/smix/avadev\ (deleted)	1	ssh	:ssh -t avasarhely@atom1103.telekom.intra
-pane	14_atomTST	1	0	:	1	:/home2/smix/avadev\ (deleted)	1	bash	:
-pane	14_atomTST	2	0	:	1	:/home2/smix/avadev\ (deleted)	1	bash	:
-pane	14_atomTST	3	0	:-	1	:/home2/smix/avadev\ (deleted)	1	bash	:
-pane	14_atomTST	4	1	:*Z	1	:/home2/smix/avadev\ (deleted)	1	bash	:
-pane	14_atomTST	4	1	:*Z	2	:/home2/smix/avadev\ (deleted)	0	bash	:
-pane	21_smix	0	0	:Z	1	:/home2/smix\ (deleted)	1	ssh	:ssh smix@10.117.162.174
-pane	21_smix	0	0	:Z	2	:/home2/smix\ (deleted)	0	bash	:
-pane	21_smix	1	0	:-	1	:/home2/smix\ (deleted)	1	ssh	:ssh smix@smixa.telekom.intra
-pane	21_smix	2	1	:*	1	:/home2/smix\ (deleted)	1	ssh	:ssh smix@smixb.t-mobile.intra
-pane	21_smix	3	0	:	1	:/home2/smix\ (deleted)	1	ssh	:ssh smix@smixc.t-mobile.intra
-pane	31_mtdes	1	0	:-	1	:/home2/smix\ (deleted)	1	ssh	:ssh mt_op@10.5.11.89
-pane	31_mtdes	2	1	:*	1	:/home/smix	1	ssh	:ssh mt_op@10.5.11.89
-pane	31_mtdes	3	0	:	1	:/home/smix	1	ssh	:ssh mt_op@10.5.11.89
-window	0_conf	0	:avasarhely@ncsmixtst:~	1	:*	c39a,190x55,0,0{93x55,0,0,1,96x55,94,0,2}	off
-window	11_atomDEV	1	:bash	0	:	c2c0,190x55,0,0,3	:
-window	11_atomDEV	3	:	0	:	c2c1,190x55,0,0,4	off
-window	11_atomDEV	4	:vi@a2204	0	:	c2c2,190x55,0,0,5	off
-window	11_atomDEV	5	:devA@nc	1	:*	c2c3,190x55,0,0,6	off
-window	11_atomDEV	6	:devC@nc	0	:-	c2c4,190x55,0,0,7	off
-window	11_atomDEV	7	:ssh	0	:	c2c5,190x55,0,0,8	:
-window	12_atomSTAGE	1	:2101	0	:	c2c6,190x55,0,0,9	off
-window	12_atomSTAGE	2	:2204	1	:*	618f,190x55,0,0,10	off
-window	12_atomSTAGE	3	:2203	0	:-	6190,190x55,0,0,11	off
-window	12_atomSTAGE	4	:2201	0	:	6191,190x55,0,0,12	off
-window	13_atomPROD	1	:1207	0	:	6192,190x55,0,0,13	off
-window	13_atomPROD	2	:1205	1	:*	6193,190x55,0,0,14	off
-window	13_atomPROD	3	:1204	0	:-	6194,190x55,0,0,15	off
-window	13_atomPROD	4	:ssh	0	:	6195,190x55,0,0,16	:
-window	13_atomPROD	5	:ssh	0	:	6196,190x55,0,0,17	:
-window	14_atomTST	1	:bash	0	:	6197,190x55,0,0,18	:
-window	14_atomTST	2	:bash	0	:	6198,190x55,0,0,19	:
-window	14_atomTST	3	:bash	0	:-	e18f,190x55,0,0,20	:
-window	14_atomTST	4	:bash	1	:*Z	7ff8,190x55,0,0{95x55,0,0,21,94x55,96,0,22}	:
-window	21_smix	0	:smixtest	0	:Z	7b8d,190x55,0,0{94x55,0,0,23,95x55,95,0,24}	off
-window	21_smix	1	:smixa	0	:-	e194,190x55,0,0,25	off
-window	21_smix	2	:smixb	1	:*	e195,190x55,0,0,26	off
-window	21_smix	3	:smixc	0	:	e196,190x55,0,0,27	off
-window	31_mtdes	1	:prod	0	:-	e197,190x55,0,0,28	off
-window	31_mtdes	2	:tmp_prod	1	:*	6196,190x55,0,0,36	off
-window	31_mtdes	3	:tst	0	:	6199,190x55,0,0,39	off
-state	14_atomTST	21_smix
+pane	04_dev@laptop	1	1	:*	1	:/home/smix/avadev	1	bash	:
+pane	05_dev@mate	1	0	:-Z	1	:/home/smix/work/atom	1	nvim	:/tmp/.mount_nvimiio78y/usr/bin/nvim
+pane	05_dev@mate	1	0	:-Z	2	:/home/smix/work/atom/build/cacheloaders/king_ufe_cacheloader	0	bash	:
+pane	05_dev@mate	2	0	:	1	:/home/smix/work/atom/build/tnhproxy	0	bash	:
+pane	05_dev@mate	2	0	:	2	:/home/smix/work/atom/build/template_python_images	1	mc	:mc
+pane	05_dev@mate	3	1	:*	1	:/home/smix/work/atom	1	nvim	:/tmp/.mount_nvimRSWKbQ/usr/bin/nvim
+pane	11_atomDEV	1	0	:	1	:/home/smix	1	bash	:
+pane	11_atomDEV	3	0	:-	1	:/home/smix	1	bash	:
+pane	11_atomDEV	4	1	:*	1	:/home/smix	1	ssh	:ssh -t avasarhely@atom2204.telekom.intra
+pane	11_atomDEV	5	0	:	1	:/home/smix	1	ssh	:ssh -t avasarhely@ncsmixtst.t-mobile.intra
+pane	11_atomDEV	7	0	:	1	:/home/smix	1	bash	:
+pane	12_atomSTAGE	1	0	:	1	:/home/smix	1	bash	:
+pane	12_atomSTAGE	2	1	:*	1	:/home/smix	1	ssh	:ssh -t avasarhely@atom2204.telekom.intra
+pane	12_atomSTAGE	3	0	:-	1	:/home/smix	1	bash	:
+pane	12_atomSTAGE	4	0	:	1	:/home/smix	1	ssh	:ssh -t avasarhely@atom2205.telekom.intra
+pane	12_atomSTAGE	5	0	:	1	:/home/smix	0	ssh	:ssh -t avasarhely@atom2201.telekom.intra
+pane	12_atomSTAGE	5	0	:	2	:/home/smix	1	ssh	:ssh avasarhely@atom2201.telekom.intra
+pane	12_atomSTAGE	6	0	:	1	:/home/smix	1	ssh	:ssh avasarhely@atom2206.telekom.intra
+pane	13_atomPROD	1	0	:	1	:/home/smix	1	bash	:
+pane	13_atomPROD	2	0	:	1	:/home/smix	1	ssh	:ssh -t avasarhely@atom1205.telekom.intra
+pane	13_atomPROD	3	1	:*Z	1	:/home/smix	1	ssh	:ssh -t avasarhely@atom1204.telekom.intra
+pane	13_atomPROD	3	1	:*Z	2	:/home/smix	0	ssh	:ssh -t avasarhely@atom1204.telekom.intra
+pane	13_atomPROD	4	0	:-	1	:/home/smix	1	ssh	:ssh -t avasarhely@atom1102.telekom.intra
+pane	13_atomPROD	5	0	:	1	:/home/smix	1	ssh	:ssh -t avasarhely@atom1103.telekom.intra
+pane	13_atomPROD	6	0	:	1	:/home/smix	1	bash	:
+pane	14_atomTST	1	0	:	1	:/home/smix	1	bash	:
+pane	14_atomTST	2	0	:	1	:/home/smix	1	bash	:
+pane	14_atomTST	3	0	:-	1	:/home/smix	1	bash	:
+pane	14_atomTST	4	1	:*Z	1	:/home/smix	1	ssh	:ssh -t avasarhely@atom4201.telekom.intra
+pane	14_atomTST	4	1	:*Z	2	:/home/smix	0	bash	:
+pane	21_smix	0	0	:Z	1	:/home/smix	1	ssh	:ssh smix@10.117.162.174
+pane	21_smix	0	0	:Z	2	:/home/smix	0	bash	:
+pane	21_smix	1	1	:*	1	:/home/smix	1	ssh	:ssh smix@smixa.telekom.intra
+pane	21_smix	2	0	:-	1	:/home/smix	1	ssh	:ssh smix@smixb.t-mobile.intra
+pane	21_smix	3	0	:	1	:/home/smix	1	ssh	:ssh smix@smixc.t-mobile.intra
+pane	31_mtdes	1	0	:	1	:/home/smix	1	ssh	:ssh mt_op@10.5.11.89
+pane	31_mtdes	2	0	:	1	:/home/smix	1	ssh	:ssh -i /home/smix/.ssh/id_rsa.smixtst mt_op@10.3.79.135
+pane	31_mtdes	3	0	:-	1	:/home/smix	1	ssh	:ssh smix@10.117.162.174
+pane	31_mtdes	4	1	:*	1	:/home/smix	1	ssh	:ssh mt_op@10.5.11.89
+pane	99_avadot	1	1	:*	1	:/home/smix	1	bash	:
+window	04_dev@laptop	1	:bash	1	:*	6763,213x58,0,0,52	:
+window	05_dev@mate	1	:nvim	0	:-Z	52a3,213x58,0,0{110x58,0,0,32,102x58,111,0,39}	:
+window	05_dev@mate	2	:mc	0	:	e970,213x58,0,0{106x58,0,0,42,106x58,107,0,43}	:
+window	05_dev@mate	3	:p_molhelper	1	:*	e766,213x58,0,0,46	off
+window	11_atomDEV	1	:bash	0	:	ce60,213x58,0,0,3	:
+window	11_atomDEV	3	:	0	:-	ce61,213x58,0,0,4	off
+window	11_atomDEV	4	:vi@a2204	1	:*	ce62,213x58,0,0,5	off
+window	11_atomDEV	5	:devA@nc	0	:	ce63,213x58,0,0,6	off
+window	11_atomDEV	7	:bash	0	:	ce65,213x58,0,0,8	:
+window	12_atomSTAGE	1	:2101	0	:	ce66,213x58,0,0,9	off
+window	12_atomSTAGE	2	:2204	1	:*	6766,213x58,0,0,36	off
+window	12_atomSTAGE	3	:2203	0	:-	6760,213x58,0,0,11	off
+window	12_atomSTAGE	4	:2205	0	:	6761,213x58,0,0,12	off
+window	12_atomSTAGE	5	:2201	0	:	e971,213x58,0,0{106x58,0,0,40,106x58,107,0,47}	off
+window	12_atomSTAGE	6	:2206	0	:	e761,213x58,0,0,41	off
+window	13_atomPROD	1	:1207	0	:	6762,213x58,0,0,13	off
+window	13_atomPROD	2	:1205	0	:	6763,213x58,0,0,14	off
+window	13_atomPROD	3	:1204	1	:*Z	2974,213x58,0,0{106x58,0,0,15,106x58,107,0,48}	off
+window	13_atomPROD	4	:1102	0	:-	6765,213x58,0,0,16	off
+window	13_atomPROD	5	:1103	0	:	6766,213x58,0,0,17	off
+window	13_atomPROD	6	:bash	0	:	6767,213x58,0,0,18	:
+window	14_atomTST	1	:bash	0	:	6768,213x58,0,0,19	:
+window	14_atomTST	2	:bash	0	:	e75f,213x58,0,0,20	:
+window	14_atomTST	3	:bash	0	:-	e760,213x58,0,0,21	:
+window	14_atomTST	4	:ssh	1	:*Z	ed87,213x58,0,0{107x58,0,0,22,105x58,108,0,23}	:
+window	21_smix	0	:smixtest	0	:Z	e971,213x58,0,0{106x58,0,0,24,106x58,107,0,25}	off
+window	21_smix	1	:smixa	1	:*	e765,213x58,0,0,26	off
+window	21_smix	2	:smixb	0	:-	e766,213x58,0,0,27	off
+window	21_smix	3	:smixc	0	:	e767,213x58,0,0,28	off
+window	31_mtdes	1	:prod	0	:	e768,213x58,0,0,29	off
+window	31_mtdes	2	:tmp_prod	0	:	6760,213x58,0,0,30	off
+window	31_mtdes	3	:test	0	:-	6761,213x58,0,0,31	off
+window	31_mtdes	4	:prod	1	:*	6763,213x58,0,0,33	off
+window	99_avadot	1	:bash	1	:*	6762,213x58,0,0,51	:
+state	05_dev@mate	11_atomDEV
