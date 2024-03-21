@@ -42,7 +42,8 @@
   ;; nav  (tap-next @n01 (layer-toggle navigation))
   ;;nav  (tap-next (layer-switch navigation) (layer-toggle navigation))
   ;;nav  (multi-tap 300 (layer-toggle navigation) (layer-switch navigation))
-  nav (tap-next tab (layer-toggle navigation))
+  sym (tap-next tab (layer-toggle symbols))
+  ;;nav (tap-next tab (layer-toggle navigation))
   nv2 (tap-next \ (layer-toggle navigation))
   nv1 (layer-toggle navigation)
 
@@ -80,10 +81,10 @@
 
 (deflayer base
   esc       1    2    3    4    5       6    7    8    9    0    -    =    bspc   nlck kp/  kp*  esc
-  @nav      q    w    e    r    t       y    u    i    o    p    [    ]    ret    del  pgdn pgup bspc
-  lctl      a    s    d    f    g       h    j    k    l    ;    '    @nv2        home up   end
+  @sym      q    w    e    r    t       y    u    i    o    p    [    ]    ret    del  end  pgup bspc
+  lctl      a    s    d    f    g       h    j    k    l    ;    '    @nv2        home up   pgdn
   lsft lsft z    x    c    v    b       n    m    ,    .    /    rsft      up     left down rght kprt
-  lctl wkup lmet lalt           @hun              ralt @nv1 rctl      left down   rght ins  del  
+  lctl wkup lmet lalt           @hun              @hun @hun rctl      left down   rght ins  del  
 ;;lctl wkup lmet lalt           @shu              @lsy @nv1 rctl      left down   rght ins  del  
 )
 
@@ -95,11 +96,18 @@
   udo C-z
   )
 (deflayer navigation
-  _         f1   f2   f3   f4   f5      f6   f7   _    del  pgdn pgup f12  bspc   _    _    _    _ 
-  _         ~    lsft lctl _    XX      _    _    home up   end  \(   \)    ret    _    _    _    _
-  @bas      `    _    _    lalt XX      _    _    left down rght _     _           _    _    _
-  _    _    @udo @cut @cpy @pst XX      XX   del  pgup XX   pgdn ins   _      _    _    _    _
+  _         f1   f2   f3   f4   f5      f6   f7   f8   f9   f10  f11   f12  bspc   _    _    _    _ 
+  _         ~    lsft lctl _    XX      _    _    del  end  up   ins   pgup ret    _    _    _    _
+  @bas      `    _    _    lalt XX      _    _    home left down rght  pgdn        _    _    _
+  _    _    @udo @cut @cpy @pst XX      XX   _    _    XX   _    _     _      _    _    _    _
   _    _    _    _              bspc              _    _    _          _    _      _    _    _  
+)
+(deflayer symbols
+  _         _    _    _    _    _       _    _    _    _    _    _     _    _      _    _    _    _
+  _         ~    _    _    _    _       _    _    _    _    _     \(   \)   _      _    _    _    _
+  _         `    _    _    _    _       _    _    _    _    _    _     _           _    _    _
+  _    _    _    _    _    _    _       _    _    _    _    _    _     _      _    _    _    _
+  _    _    _    _              _                 _    _    _          _    _      _    _    _
 )
 
 
@@ -108,8 +116,8 @@
 ;;                                                            [{   ]}   ret
 ;;                                                       ;:   '"   \|
 ;;                                             ,<   .>   /?   rsft
-;;   _         _    _    _    _    _       _    _    _    _    _    _    _    _      _    _    _    _
-(deflayer symbols
+;;_         _    _    _    _    _       _    _    _    _    _    _    _    _      _    _    _    _
+(deflayer XXsymbols
   _         @ceu Á    É    @cau _       _    _    @cuu Í    Ó    Ö    _    _      _    _    _    _
   _         !    @    #    $    %       _    *    =    \(   \)   {    }    ret    _    _    _    _
   _         `    ~    ^    &    _       _    +    -    _    :    "    |           _    _    _     
