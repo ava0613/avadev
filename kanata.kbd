@@ -1,0 +1,150 @@
+(defsrc
+  grv        1    2    3    4    5      6    7    8    9    0    -    =    bspc     nlck kp/  kp*  kp- 
+  tab        q    w    e    r    t      y    u    i    o    p    [    ]             kp7  kp8  kp9  kp+
+  caps       a    s    d    f    g      h    j    k    l    ;    '    \    ret      kp4  kp5  kp6  
+  lsft 102d  z    x    c    v    b      n    m    ,    .    /    rsft               kp1  kp2  kp3  kprt
+  wkup lctl lmet lalt           spc              ralt rmet rctl                          kp0  kp.
+)
+
+(defalias
+  ;; tap: esc, hold: toggle layer-switching nav0 while held
+  tab (tap-hold 200 200 esc (layer-toggle nav1))
+  ;;ralt (tap-hold 200 200 ralt (layer-toggle nav1))
+  ralt (layer-toggle nav1)
+
+  ;; tap for tab, hold for lctl
+  cap (tap-hold 200 200 tab lctl)
+  
+  ;; symbols
+  lsy (tap-hold 200 200 q (layer-toggle left_symbols))
+  rsy (tap-hold 200 200 ; (layer-toggle right_symbols))
+  
+  ;; hungarian characters
+  hun (tap-hold 200 200 spc (layer-toggle hun))
+  huc (layer-toggle huc)
+
+)
+
+#| BASE layer 
+- note the counerclockwise rotation of the a-w-q characters!!!
+          
+|#
+(deflayer base
+  esc        1    2    3    4    5      6    7    8    9    0    -    =    bspc     nlck kp/  kp*  esc
+  @tab       w    a    e    r    t      y    u    i    o    p    [    ]             del  ins  bspc pgup
+  @cap       @lsy s    d    f    g      h    j    k    l    @rsy '    \    ret      home up   end  
+  lsft 102d  z    x    c    v    b      n    m    ,    .    /    rsft               left down rght pgdn
+  wkup lctl lmet lalt            @hun             @ralt rmet rctl                        ins  del  
+)                                                                                 
+
+#| NAVIGATION layers
+
+|#
+(deflayer nav0
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
+  _         _    _    _    _    _       ret  home up   end  pgup _    _             _    _    _    _
+  _         _    _    _    _    _       del  left down rght pgdn _    _    _        _    _    _    
+  _    _    _    _    _    _    _       ins  _    _    _    _    _                  _    _    _    _
+  _    _    _    _              ret               _    _    _                            _    _    
+)
+(deflayer nav1
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
+  _         _    _    _    _    _       _    _    ret  home up   end  pgup          _    _    _    _
+  _         _    _    _    _    _       _    _    del  kp4  down rght pgdn _        _    _    _    
+  _    _    _    _    _    _    _       _    _    ins  _    _    _                  _    _    _    _
+  _    _    _    _              _                 _    _    _                            _    _    
+)
+
+#|
+#### SYMBOLS
+
+In the current version of kanata we can't add yet symbols, we have to use the shift-notation: S-x
+for reference here is the layout with the symbols
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _       _    _    _    _
+  _         !    @    #    $    %       ^    =    '    "    &    _    _    _       _    _    _    _
+  _         ~    {    [    ]    }       +    -    \(   \)   :    _    _            _    _    _    
+  _    _    `    .    /    |    \\      *    \_   <    >    ?    _         _       _    _    _    _
+  _    _    _    _              _                 _    _    _         _    _       _    _    _    
+  
+We need backspace for q-space, and enter for ;-space, we can do this with two layers
+|#
+(deflayer left_symbols
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _       _    _    _    _
+  _         S-1  S-2  S-3  S-4  S-5     S-6  =    '    S-'  S-7  _    _            _    _    _    _
+  _         S-`  S-[  [    ]    S-]     S--  -    S-9  S-0  S-;  _    _    _       _    _    _    
+  _    _    `    .    /    S-\  \       S-8  S-=  S-,  S-.  S-/  _                 _    _    _    _
+  _    _    _    _              bspc              _    _    _                           _    _    
+)
+(deflayer right_symbols
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _       _    _    _    _
+  _         S-1  S-2  S-3  S-4  S-5     S-6  =    '    S-'  S-7  _    _            _    _    _    _
+  _         S-`  S-[  [    ]    S-]     S--  -    S-9  S-0  S-;  _    _    _       _    _    _    
+  _    _    `    .    /    S-\  \       S-8  S-=  S-,  S-.  S-/  _                 _    _    _    _
+  _    _    _    _              ret               _    _    _                           _    _    
+)
+
+
+;; ### HUN chars
+(defalias
+  á    (unicode á)
+  Á    (unicode Á)
+  é    (unicode é)
+  É    (unicode É)
+  í    (unicode í)
+  Í    (unicode Í)
+  
+  ó    (unicode ó)
+  Ó    (unicode Ó)
+  ö    (unicode ö)
+  Ö    (unicode Ö)
+  ő    (unicode ő)
+  Ő    (unicode Ő)
+
+  ú    (unicode ú)
+  Ú    (unicode Ú)
+  ü    (unicode ü)
+  Ü    (unicode Ü)
+  ű    (unicode ű)
+  Ű    (unicode Ű)
+  )
+
+
+;;          q    w    e    r    t       y    u    i    o    p    [    ]    ret  
+;;caps      a    s    d    f    g       h    j    k    l    ;    '    \
+(deflayer hun
+  grv       @í   _    _    _    _       _    @ű   @ú   @ő   @ó   _    _    _       _    _    _    _
+  _         @ü   _    _    _    _       _    _    _    _    _    @ű   _            _    _    _    _
+  y         @á   _    _    _    _       _    _    _    _    @é   @ú   _    _       _    _    _    
+  @huc _    _    @ö   _    _    _       _    _    @ő   @í   @ó   @ó                _    _    _    _
+  _    _    _    _              _                 _    _    _                           _    _    
+)
+
+
+(deflayer huc
+  _         @Í   _    _    _    _       _    @Ű   @Ú   @Ő   @Ó   _    _    _       _    _    _    _
+  _         @Ü   _    _    _    _       _    _    _    _    _    @Ű   _            _    _    _    _
+  S-y       @Á   _    _    _    _       _    _    _    _    @É   @Ú   _    _       _    _    _    
+  _    _    _    @Ö   _    _    _       _    _    @Ő   @Í   @Ó   @Ó                _    _    _    _
+  _    _    _    _              _                 _    _    _                           _    _    
+)
+
+
+
+
+#|  old stuff for ref
+
+
+
+
+(deflayer base
+  esc       1    2    3    4    5       6    7    8    9    0    -    =    bspc   nlck kp/  kp*  esc
+  @nav      q    w    e    r    t       y    u    i    o    p    [    ]    ret    del  pgdn pgup bspc
+  lctl      a    s    d    f    g       h    j    k    l    ;    '    @nv2        home up   end
+  lsft lsft z    x    c    v    b       n    m    ,    .    /    rsft      up     left down rght kprt
+  lctl wkup lmet lalt           @hun              ralt @nv1 rctl      left down   rght ins  del  
+;;lctl wkup lmet lalt           @shu              @lsy @nv1 rctl      left down   rght ins  del  
+)
+
+
+
+|#
