@@ -3,10 +3,26 @@
   tab        q    w    e    r    t      y    u    i    o    p    [    ]             kp7  kp8  kp9  kp+
   caps       a    s    d    f    g      h    j    k    l    ;    '    \    ret      kp4  kp5  kp6  
   lsft 102d  z    x    c    v    b      n    m    ,    .    /    rsft               kp1  kp2  kp3  kprt
-  wkup lctl lmet lalt           spc              ralt rmet rctl                          kp0  kp.
+  wkup lctl lmet lalt           spc              ralt rmet rctl                          kp0  kp.  
 )
 
+(defcfg
+  ;; ava - not sure yet if this is needed in my case
+  ;;windows-altgr cancel-lctl-press ;; remove the lctl press that comes as a combo with ralt
+  
+  ;;process-unmapped-keys yes
+)
+
+;;(defchords mychords 400
+;;  (caps    ) (tap-hold 200 200 tab lctl)
+;;  (     spc) (tap-hold 200 200 spc (layer-toggle hun))
+;;  (caps spc) (macro bspc)
+;;)
+
 (defalias
+  ;;ch1 (chord mychords caps)
+  ;;ch2 (chord mychords spc)
+
   ;; tap: esc, hold: toggle layer-switching nav0 while held
   tab (tap-hold 200 200 esc (layer-toggle nav1))
   ;;ralt (tap-hold 200 200 ralt (layer-toggle nav1))
@@ -14,30 +30,60 @@
 
   ;; tap for tab, hold for lctl
   cap (tap-hold 200 200 tab lctl)
+
   
   ;; symbols
   lsy (tap-hold 200 200 q (layer-toggle left_symbols))
-  rsy (tap-hold 200 200 ; (layer-toggle right_symbols))
+  rsy (tap-hold 200 200 ; (layer-toggle left_symbols))
   
   ;; hungarian characters
   hun (tap-hold 200 200 spc (layer-toggle hun))
+  spc (fork @hun (unmod ret) (lctl 0))
   huc (layer-toggle huc)
+
+  fun (tap-hold 200 200 / (layer-toggle nav2)) ;;function keys layer
+  w (tap-hold 200 200 w (layer-toggle nav3)) ;;
+  z (tap-hold 200 200 z (layer-toggle nav4)) ;;
+
+
+  rrt (tap-hold 200 200 ret lsft)
+  bsp (tap-hold 200 200 bspc lsft) 
 
 )
 
 #| BASE layer 
 - note the counerclockwise rotation of the a-w-q characters!!!
-          
+ (deflayer base
+  esc        1    2    3    4    5      6    7    8    9    0    -    =    bspc     nlck kp/  kp*  esc
+  @tab       @w   a    e    r    t      y    u    i    o    p    @bsp ]             home pgup end pgup
+  @cap       @lsy s    d    f    g      h    j    k    l    @rsy @rrt \    ret      del  up   pgdn  
+  lsft lsft  @z   x    c    v    b      n    m    ,    .    @fun rsft               left down rght pgdn
+  wkup lctl  lmet lalt           @hun             @ralt rmet rctl                        ins  del  
+)       
 |#
 (deflayer base
   esc        1    2    3    4    5      6    7    8    9    0    -    =    bspc     nlck kp/  kp*  esc
-  @tab       w    a    e    r    t      y    u    i    o    p    [    ]             del  ins  bspc pgup
-  @cap       @lsy s    d    f    g      h    j    k    l    @rsy '    \    ret      home up   end  
-  lsft 102d  z    x    c    v    b      n    m    ,    .    /    rsft               left down rght pgdn
-  wkup lctl lmet lalt            @hun             @ralt rmet rctl                        ins  del  
+  @tab       @w   a    e    r    t      y    u    i    o    p    @bsp ]             home pgup end pgup
+  @cap       @lsy s    d    f    g      h    j    k    l    @rsy @rrt \    ret      del  up   pgdn  
+  lsft lsft  @z   x    c    v    b      n    m    ,    .    @fun rsft               left down rght pgdn
+  wkup lctl  lmet lalt           @hun             @ralt rmet rctl                        ins  del  
 )                                                                                 
 
 #| NAVIGATION layers
+(deflayer nav1
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
+  _         _    _    _    _    _       _    ret  home up   end  pgup _             _    _    _    _
+  _         _    _    _    _    _       _    del  left down rght pgdn _    _        _    _    _    
+  _    _    _    _    _    _    _       _    ins  _    _    _    _                  _    _    _    _
+  _    _    _    _              _                 _    _    _                            _    _    
+)
+(deflayer nav1
+  _         f1   f2   f3   f4   f5      f6   f7   f8   f9   f10  f11  f12  _        _    _    _    _   
+  _         /    7    8    9    -       _    ret  home up   end  pgup _             _    _    _    _
+  _         S-8  4    5    6    S-=     _    del  left down rght pgdn _    _        _    _    _    
+  _    _    0    1    2    3    .       _    ins  _    _    _    _                  _    _    _    _
+  _    _    _    _              ret               _    _    _                            _    _    
+)
 
 |#
 (deflayer nav0
@@ -48,13 +94,33 @@
   _    _    _    _              ret               _    _    _                            _    _    
 )
 (deflayer nav1
-  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
-  _         _    _    _    _    _       _    _    ret  home up   end  pgup          _    _    _    _
-  _         _    _    _    _    _       _    _    del  kp4  down rght pgdn _        _    _    _    
-  _    _    _    _    _    _    _       _    _    ins  _    _    _                  _    _    _    _
-  _    _    _    _              _                 _    _    _                            _    _    
+  _         f1   f2   f3   f4   f5      f6   f7   f8   f9   f10  f11  f12  _        _    _    _    _   
+  _         _    f7   f8   f9   f10     _    ret  home up   end  pgup _             _    _    _    _
+  _         _    f4   f5   f6   f11     _    del  left down rght pgdn _    _        _    _    _    
+  _    _    _    f1   f2   f3   f12     _    ins  _    _    _    _                  _    _    _    _
+  _    _    _    _              bspc              _    _    _                            _    _    
 )
-
+(deflayer nav2
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
+  _         /    7    8    9    -       _    _    _    _    _    _    _             _    _    _    _
+  _         S-8  4    5    6    S-=     _    _    _    _    _    _    _    _        _    _    _    
+  _    _    0    1    2    3    .       _    _    _    _    _    _                  _    _    _    _   
+  _    _    _    _              ret               _    _    _                            _    _    
+)
+(deflayer nav3
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _    _    _             _    _    _    _
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    
+  _    _    _    _    _    _    _       _    _    _    _    _    _                  _    _    _    _   
+  _    _    _    _              bspc              _    _    _                            _    _    
+)
+(deflayer nav4
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _    _    _             _    _    _    _
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    
+  _    _    _    _    _    _    _       _    _    _    _    _    _                  _    _    _    _   
+  _    _    _    _              ret              _    _    _                            _    _    
+)
 #|
 #### SYMBOLS
 
@@ -70,16 +136,16 @@ We need backspace for q-space, and enter for ;-space, we can do this with two la
 |#
 (deflayer left_symbols
   _         _    _    _    _    _       _    _    _    _    _    _    _    _       _    _    _    _
-  _         S-1  S-2  S-3  S-4  S-5     S-6  =    '    S-'  S-7  _    _            _    _    _    _
-  _         S-`  S-[  [    ]    S-]     S--  -    S-9  S-0  S-;  _    _    _       _    _    _    
-  _    _    `    .    /    S-\  \       S-8  S-=  S-,  S-.  S-/  _                 _    _    _    _
-  _    _    _    _              bspc              _    _    _                           _    _    
+  bspc      S-1  S-[  S-]  S-4  S-5     S-6  =    '    S-'  S-7  _    _            _    _    _    _
+  ret       S-`  [    ]    S-3  S-2     S-=  -    S-9  S-0  S-;  _    _    _       _    _    _    
+  _    _    `    .    /    S-\  \       S-8  S--  S-,  S-.  S-/  _                 _    _    _    _
+  _    _    _    _              _                 _    _    _                           _    _    
 )
 (deflayer right_symbols
   _         _    _    _    _    _       _    _    _    _    _    _    _    _       _    _    _    _
   _         S-1  S-2  S-3  S-4  S-5     S-6  =    '    S-'  S-7  _    _            _    _    _    _
-  _         S-`  S-[  [    ]    S-]     S--  -    S-9  S-0  S-;  _    _    _       _    _    _    
-  _    _    `    .    /    S-\  \       S-8  S-=  S-,  S-.  S-/  _                 _    _    _    _
+  _         S-`  S-[  [    ]    S-]     S-=  -    S-9  S-0  S-;  _    _    _       _    _    _    
+  _    _    `    .    /    S-\  \       S-8  S--  S-,  S-.  S-/  _                 _    _    _    _
   _    _    _    _              ret               _    _    _                           _    _    
 )
 
