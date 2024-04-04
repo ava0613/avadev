@@ -30,24 +30,29 @@
 
   ;; tap for tab, hold for lctl
   cap (tap-hold 200 200 tab lctl)
+  ;;cap (tap-dance 200 (tab C-c (layer-switch l2) esc))
 
   
   ;; symbols
-  lsy (tap-hold 200 200 q (layer-toggle left_symbols))
+  lsy (tap-hold 200 200 a (layer-toggle left_symbols))
   rsy (tap-hold 200 200 ; (layer-toggle left_symbols))
   
   ;; hungarian characters
   hun (tap-hold 200 200 spc (layer-toggle hun))
-  spc (fork @hun (unmod ret) (lctl 0))
+  ;;spc (fork @hun (unmod ret) (lctl 0))
   huc (layer-toggle huc)
 
-  fun (tap-hold 200 200 / (layer-toggle nav2)) ;;function keys layer
-  w (tap-hold 200 200 w (layer-toggle nav3)) ;;
-  z (tap-hold 200 200 z (layer-toggle nav4)) ;;
+  num (tap-hold 200 200 / (layer-toggle nav2)) ;;function keys layer
+  q (tap-hold 200 200 q (layer-toggle nav3)) ;;
+  w (tap-hold 200 200 w (layer-toggle nav4)) ;;
 
 
+  s (tap-hold 200 200 s lsft)
+  l (tap-hold 200 200 l lsft)
   rrt (tap-hold 200 200 ret lsft)
   bsp (tap-hold 200 200 bspc lsft) 
+
+  rst (caps-word 2000)
 
 )
 
@@ -55,17 +60,17 @@
 - note the counerclockwise rotation of the a-w-q characters!!!
  (deflayer base
   esc        1    2    3    4    5      6    7    8    9    0    -    =    bspc     nlck kp/  kp*  esc
-  @tab       @w   a    e    r    t      y    u    i    o    p    @bsp ]             home pgup end pgup
-  @cap       @lsy s    d    f    g      h    j    k    l    @rsy @rrt \    ret      del  up   pgdn  
-  lsft lsft  @z   x    c    v    b      n    m    ,    .    @fun rsft               left down rght pgdn
+  @tab       @q   @w   e    r    t      y    u    i    o    p    @bsp ]             home pgup end pgup
+  @cap       @lsy @s   d    f    g      h    j    k    @l   @rsy @rrt \    ret      del  up   pgdn  
+  lsft lsft  z    x    c    v    b      n    m    ,    .    @num @rst               left down rght pgdn
   wkup lctl  lmet lalt           @hun             @ralt rmet rctl                        ins  del  
 )       
 |#
 (deflayer base
   esc        1    2    3    4    5      6    7    8    9    0    -    =    bspc     nlck kp/  kp*  esc
-  @tab       @w   a    e    r    t      y    u    i    o    p    @bsp ]             home pgup end pgup
-  @cap       @lsy s    d    f    g      h    j    k    l    @rsy @rrt \    ret      del  up   pgdn  
-  lsft lsft  @z   x    c    v    b      n    m    ,    .    @fun rsft               left down rght pgdn
+  @tab       @q   @w   e    r    t      y    u    i    o    p    @bsp ]             home pgup end pgup
+  @cap       @lsy @s   d    f    g      h    j    k    @l   @rsy @rrt \    ret      del  up   pgdn  
+  lsft lsft  z    x    c    v    b      n    m    ,    .    @num @rst               left down rght pgdn
   wkup lctl  lmet lalt           @hun             @ralt rmet rctl                        ins  del  
 )                                                                                 
 
@@ -136,9 +141,9 @@ We need backspace for q-space, and enter for ;-space, we can do this with two la
 |#
 (deflayer left_symbols
   _         _    _    _    _    _       _    _    _    _    _    _    _    _       _    _    _    _
-  bspc      S-1  S-[  S-]  S-4  S-5     S-6  =    '    S-'  S-7  _    _            _    _    _    _
+  bspc      S-1  S-[  S-]  S-4  S-5     S-6  S-8  '    S-'  S-7  _    _            _    _    _    _
   ret       S-`  [    ]    S-3  S-2     S-=  -    S-9  S-0  S-;  _    _    _       _    _    _    
-  _    _    `    .    /    S-\  \       S-8  S--  S-,  S-.  S-/  _                 _    _    _    _
+  _    _    `    .    /    S-\  \       S--  =    S-,  S-.  S-/  _                 _    _    _    _
   _    _    _    _              _                 _    _    _                           _    _    
 )
 (deflayer right_symbols
@@ -179,9 +184,9 @@ We need backspace for q-space, and enter for ;-space, we can do this with two la
 ;;caps      a    s    d    f    g       h    j    k    l    ;    '    \
 (deflayer hun
   grv       @í   _    _    _    _       _    @ű   @ú   @ő   @ó   _    _    _       _    _    _    _
-  _         @ü   _    _    _    _       _    _    _    _    _    @ű   _            _    _    _    _
-  y         @á   _    _    _    _       _    _    _    _    @é   @ú   _    _       _    _    _    
-  @huc _    _    @ö   _    _    _       _    _    @ő   @í   @ó   @ó                _    _    _    _
+  _         @á   @ö    _    _    _       _    _    _    _    _    @ű   _            _    _    _    _
+  y         _    _    _    _    _       _    _    _    _    @é   @ú   _    _       _    _    _    
+  @huc _    _    @ü   _    _    _       _    _    @ő   @í   @ó   @ó                _    _    _    _
   _    _    _    _              _                 _    _    _                           _    _    
 )
 
