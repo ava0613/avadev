@@ -1,0 +1,230 @@
+(defsrc
+  grv        1    2    3    4    5      6    7    8    9    0    -    =    bspc     nlck kp/  kp*  kp- 
+  tab        q    w    e    r    t      y    u    i    o    p    [    ]             kp7  kp8  kp9  kp+
+  caps       a    s    d    f    g      h    j    k    l    ;    '    \    ret      kp4  kp5  kp6  
+  lsft 102d  z    x    c    v    b      n    m    ,    .    /    rsft               kp1  kp2  kp3  kprt
+  wkup lctl lmet lalt           spc              ralt rmet rctl                          kp0  kp.  
+)
+
+(defcfg
+  ;; ava - not sure yet if this is needed in my case
+  ;;windows-altgr cancel-lctl-press ;; remove the lctl press that comes as a combo with ralt
+  
+  ;;process-unmapped-keys yes
+)
+
+;;(defchords mychords 400
+;;  (caps    ) (tap-hold 200 200 tab lctl)
+;;  (     spc) (tap-hold 200 200 spc (layer-toggle hun))
+;;  (caps spc) (macro bspc)
+;;)
+
+(defalias
+
+  ;; ### original TAB: tap: esc, hold: toggle layer-switching nav0 while held
+  tab (tap-hold 200 200 esc (layer-toggle nav1))
+  ;;ralt (tap-hold 200 200 ralt (layer-toggle nav1))
+  ralt (layer-toggle nav1)
+
+  ;; ### original CAPS: tap for tab, hold for lctl
+  cap (tap-hold 200 200 tab lctl)
+  ;;cap (tap-dance 200 (tab C-c (layer-switch l2) esc))
+
+  
+  ;; ### symbols layer to homerow 'a' and ';'
+  lsy (tap-hold 200 200 a (layer-toggle symbols))
+  rsy (tap-hold 200 200 ; (layer-toggle symbols))
+  
+  ;; ### hungarian characters as space+X
+  hun (tap-hold 200 200 spc (layer-toggle hun))
+  huc (layer-toggle huc)
+
+  ;; ### numbers layer
+  num (tap-hold 200 200 / (layer-toggle numbers)) ;;
+  
+  ;; ### reuse space/thumbs for backspace and return 
+  q (tap-hold 200 200 q (layer-toggle space_for_return)) ;;
+  w (tap-hold 200 200 w (layer-toggle space_for_backspace )) ;;
+
+  ;; ### shift as homerow mods
+  s (tap-hold 200 200 s lsft)
+  l (tap-hold 200 200 l lsft)
+  
+  ;; ### reposition backspace and return closer to homerow
+  ;; also, reuse them as shift
+  rrt (tap-hold 200 200 ret lsft)
+  bsp (tap-hold 200 200 bspc lsft) 
+
+  ;; ### original RIGHT SHIFT: caps-word 
+  rst (caps-word 2000)
+
+
+  ;; ### macros
+  chd (macro . . /)
+  fix (macro S-f S-i S-x S-m S-e)
+  mac (layer-toggle macros)
+
+
+  ;; ### caps+space to return - nice feature, but interfers with tmux' ctrl-space
+  ;;spc (fork @hun (unmod ret) (lctl 0)) ;; 
+  
+  ;; ### space/thumb reuse solution with chords
+  ;; however, repetition does not work as expected
+  ;;ch1 (chord mychords caps)
+  ;;ch2 (chord mychords spc)
+
+)
+
+#| BASE layer 
+       
+|#
+(deflayer base
+  esc        1    2    3    4    5      6    7    8    9    0    -    =    bspc     nlck kp/  kp*  esc
+  @tab       @q   @w   e    r    t      XX   y    u    i    o    p    @bsp          home pgup end pgup
+  @cap       @lsy @s   d    f    g      XX   h    j    k    @l   @rsy @rrt ret      del  up   pgdn  
+  lsft lsft  z    x    c    v    b      @mac n    m    ,    .    @num               left down rght pgdn
+  wkup lctl  lmet lalt           @hun             @ralt rmet rctl                        ins  del  
+)                                                                                 
+
+#| #### NAVIGATION layers
+(deflayer nav0
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
+  _         _    _    _    _    _       ret  home up   end  pgup _    _             _    _    _    _
+  _         _    _    _    _    _       del  left down rght pgdn _    _    _        _    _    _    
+  _    _    _    _    _    _    _       ins  _    _    _    _    _                  _    _    _    _
+  _    _    _    _              ret               _    _    _                            _    _    
+)
+|#
+
+(deflayer nav1
+  _         f1   f2   f3   f4   f5      f6   f7   f8   f9   f10  f11  f12  _        _    _    _    _   
+  _         _    f7   f8   f9   f10     _    ret  home up   end  pgup _             _    _    _    _
+  _         _    f4   f5   f6   f11     _    del  left down rght pgdn _    _        _    _    _    
+  _    _    _    f1   f2   f3   f12     _    ins  _    _    _    _                  _    _    _    _
+  _    _    _    _              bspc              _    _    _                            _    _    
+)
+(deflayer numbers
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
+  _         /    7    8    9    -       _    _    _    _    _    _    _             _    _    _    _
+  _         S-8  4    5    6    S-=     _    _    _    _    _    _    _    _        _    _    _    
+  _    _    0    1    2    3    .       _    _    _    _    _    _                  _    _    _    _   
+  _    _    _    _              ret               _    _    _                            _    _    
+)
+(deflayer space_for_backspace
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _    _    _             _    _    _    _
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    
+  _    _    _    _    _    _    _       _    _    _    _    _    _                  _    _    _    _   
+  _    _    _    _              bspc              _    _    _                            _    _    
+)
+(deflayer space_for_return
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _    _    _             _    _    _    _
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    
+  _    _    _    _    _    _    _       _    _    _    _    _    _                  _    _    _    _   
+  _    _    _    _              ret               _    _    _                            _    _    
+)
+(deflayer macros
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _    _    _             _    _    _    _
+  _         _    _    _    @fix _       _    _    _    _    _    _    _    _        _    _    _    
+  _    _    _    _    _    _    _       _    _    _    _    _    _                  _    _    _    _   
+  _    _    _    _              _                 _    _    _                            _    _    
+)
+
+
+#| #### SYMBOLS
+
+In the current version of kanata we can't add yet symbols, we have to use the shift-notation: S-x
+for reference here is the layout with the symbols
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _       _    _    _    _
+  _         !    {    }    $    %       _    ^    *    '    "    &    _            _    _    _    _
+  _         ~    [    ]    #    @       _    +    -    \(   \)   :    _    _       _    _    _    
+  _    _    `    .    /    |    \\      _    \_   =    <    >    ?                 _    _    _    _
+  _    _    _    _              _                 _    _    _         _    _       _    _    _    
+
+
+  # older layout
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _       _    _    _    _
+  _         !    @    #    $    %       ^    =    '    "    &    _    _    _       _    _    _    _
+  _         ~    {    [    ]    }       +    -    \(   \)   :    _    _            _    _    _    
+  _    _    `    .    /    |    \\      *    \_   <    >    ?    _         _       _    _    _    _
+  _    _    _    _              _                 _    _    _         _    _       _    _    _    
+  
+
+We need backspace for q-space, and enter for ;-space, we can do this with two layers
+|#
+(deflayer symbols
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _       _    _    _    _
+  bspc      S-1  S-[  S-]  S-4  S-5     _    S-6  S-8  '    S-'  S-7  _            _    _    _    _
+  ret       S-`  [    ]    S-3  S-2     _    S-=  -    S-9  S-0  S-;  _    _       _    _    _    
+  _    _    `    @chd /    S-\  \       _    =    S--  S-,  S-.  S-/               _    _    _    _
+  _    _    _    _              _                 _    _    _                           _    _    
+)
+
+
+
+;; ### HUN chars
+(defalias
+  á    (unicode á)
+  Á    (unicode Á)
+  é    (unicode é)
+  É    (unicode É)
+  í    (unicode í)
+  Í    (unicode Í)
+  
+  ó    (unicode ó)
+  Ó    (unicode Ó)
+  ö    (unicode ö)
+  Ö    (unicode Ö)
+  ő    (unicode ő)
+  Ő    (unicode Ő)
+
+  ú    (unicode ú)
+  Ú    (unicode Ú)
+  ü    (unicode ü)
+  Ü    (unicode Ü)
+  ű    (unicode ű)
+  Ű    (unicode Ű)
+  )
+
+
+;;          q    w    e    r    t       y    u    i    o    p    [    ]    ret  
+;;caps      a    s    d    f    g       h    j    k    l    ;    '    \
+(deflayer hun
+  grv       @í   _    _    _    _       _    _    @ű   @ú   @ő   @ó   _    _       _    _    _    _
+  _         @á   @ö   _    _    _       _    _    _    _    _    _    @ű           _    _    _    _
+  y         _    _    _    _    _       _    _    _    _    _    @é   @ú   _       _    _    _    
+  @huc _    _    @ü   _    _    _       _    _    _    @ő   @í   @ó                _    _    _    _
+  _    _    _    _              _                 _    _    _                           _    _    
+)
+
+
+(deflayer huc
+  _         @Í   _    _    _    _       _    _    @Ű   @Ú   @Ő   @Ó   _    _       _    _    _    _
+  _         @Á   @Ö   _    _    _       _    _    _    _    _    _    @Ű           _    _    _    _
+  S-y       _    _    _    _    _       _    _    _    _    _    @É   @Ú   _       _    _    _    
+  _    _    _    @Ü   _    _    _       _    _    _    @Ő   @Í   @Ó                _    _    _    _
+  _    _    _    _              _                 _    _    _                           _    _    
+)
+
+
+
+
+#| #### old stuff for ref
+
+
+
+
+(deflayer base
+  esc       1    2    3    4    5       6    7    8    9    0    -    =    bspc   nlck kp/  kp*  esc
+  @nav      q    w    e    r    t       y    u    i    o    p    [    ]    ret    del  pgdn pgup bspc
+  lctl      a    s    d    f    g       h    j    k    l    ;    '    @nv2        home up   end
+  lsft lsft z    x    c    v    b       n    m    ,    .    /    rsft      up     left down rght kprt
+  lctl wkup lmet lalt           @hun              ralt @nv1 rctl      left down   rght ins  del  
+;;lctl wkup lmet lalt           @shu              @lsy @nv1 rctl      left down   rght ins  del  
+)
+
+
+
+|#
