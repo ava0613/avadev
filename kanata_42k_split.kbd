@@ -43,8 +43,8 @@
   num (tap-hold 200 200 / (layer-toggle numbers)) ;;
   
   ;; ### reuse space/thumbs for backspace and return 
-  q (tap-hold 200 200 q (layer-toggle space_for_return)) ;;
-  w (tap-hold 200 200 w (layer-toggle space_for_backspace )) ;;
+  q (tap-hold 200 200 q (layer-toggle space_for_delete)) ;;
+  w (tap-hold 200 200 w (layer-toggle space_for_return )) ;;
 
   ;; ### shift as homerow mods
   s (tap-hold 200 200 s lsft)
@@ -56,13 +56,18 @@
   bsp (tap-hold 200 200 bspc lsft) 
 
   ;; ### original RIGHT SHIFT: caps-word 
-  rst (caps-word 2000)
 
 
   ;; ### macros
   chd (macro . . /)
   fix (macro S-f S-i S-x S-m S-e)
-  mac (layer-toggle macros)
+
+
+  ;; ### split buttons
+  sp1 (tap-dance 300 (XX (layer-switch numbers)))
+  sp5 (tap-dance 300 (XX (layer-switch base)))
+  sp2 (caps-word 2000)
+  sp3 (layer-toggle macros)
 
 
   ;; ### caps+space to return - nice feature, but interfers with tmux' ctrl-space
@@ -80,9 +85,9 @@
 |#
 (deflayer base
   esc        1    2    3    4    5      6    7    8    9    0    -    =    bspc     nlck kp/  kp*  esc
-  @tab       @q   @w   e    r    t      XX   y    u    i    o    p    @bsp          home pgup end pgup
-  @cap       @lsy @s   d    f    g      XX   h    j    k    @l   @rsy @rrt ret      del  up   pgdn  
-  lsft lsft  z    x    c    v    b      @mac n    m    ,    .    @num               left down rght pgdn
+  @tab       @q   @w   e    r    t      @sp1 y    u    i    o    p    @bsp          home pgup end pgup
+  @cap       @lsy @s   d    f    g      @sp2 h    j    k    @l   @rsy @rrt ret      del  up   pgdn  
+  lsft lsft  z    x    c    v    b      @sp3 n    m    ,    .    @num               left down rght pgdn
   wkup lctl  lmet lalt           @hun             @ralt rmet rctl                        ins  del  
 )                                                                                 
 
@@ -105,17 +110,17 @@
 )
 (deflayer numbers
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
-  _         /    7    8    9    -       _    _    _    _    _    _    _             _    _    _    _
-  _         S-8  4    5    6    S-=     _    _    _    _    _    _    _    _        _    _    _    
-  _    _    0    1    2    3    .       _    _    _    _    _    _                  _    _    _    _   
+  _         /    7    8    9    -       @sp5  ret  home up   end  pgup _             _    _    _    _
+  @cap      S-8  4    5    6    S-=     XX    del  left down rght pgdn _    _        _    _    _    
+  _    _    0    1    2    3    .       XX    ins  _    _    _    _                  _    _    _    _   
   _    _    _    _              ret               _    _    _                            _    _    
 )
-(deflayer space_for_backspace
+(deflayer space_for_delete
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
   _         _    _    _    _    _       _    _    _    _    _    _    _             _    _    _    _
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    
   _    _    _    _    _    _    _       _    _    _    _    _    _                  _    _    _    _   
-  _    _    _    _              bspc              _    _    _                            _    _    
+  _    _    _    _              del               _    _    _                            _    _    
 )
 (deflayer space_for_return
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
