@@ -2,7 +2,7 @@
   grv        1    2    3    4    5      6    7    8    9    0    -    =    bspc     nlck kp/  kp*  kp- 
   tab        q    w    e    r    t      y    u    i    o    p    [    ]    \        kp7  kp8  kp9  kp+
   caps       a    s    d    f    g      h    j    k    l    ;    '         ret      kp4  kp5  kp6  
-  lsft 102d  z    x    c    v    b      n    m    ,    .    /              rsft     kp1  kp2  kp3  kprt
+  lsft       z    x    c    v    b      n    m    ,    .    /              rsft     kp1  kp2  kp3  kprt
   wkup lctl lmet lalt           spc                              ralt rmet rctl          kp0  kp.  
 )
 ;;(defsrc_xxx
@@ -67,7 +67,9 @@
   ;; ### reposition backspace and return closer to homerow
   ;; also, reuse them as shift
   rrt (tap-hold 200 200 ret (layer-toggle numbers))
+  ;;rrt (tap-hold 200 200 ret (layer-toggle symbols))
   bsp (tap-hold 200 200 bspc (layer-toggle symbols)) 
+  ;;bsp (tap-hold 200 200 bspc (layer-toggle numbers)) 
 
   ;; ### original RIGHT SHIFT: caps-word 
 
@@ -76,16 +78,21 @@
   chd (macro . . /)
   fix (macro S-f S-i S-x S-m S-e)
 
+  sp2 (caps-word-custom
+    2000
+    (a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 -)
+    (kp0 kp1 kp2 kp3 kp4 kp5 kp6 kp7 kp8 kp9 bspc del up down left rght)
+  )
 
   ;; ### split buttons
   sp1 (tap-dance 300 (XX (layer-switch numbers)))
   sp5 (tap-dance 300 (XX (layer-switch base)))
-  sp2 (caps-word 2000)
+  ;;sp2 (caps-word 2000)
   sp3 (layer-toggle macros)
 
   ;; ### nav nav
   lft (tap-hold 200 200 left (layer-toggle nvb))
-  rgt (tap-hold 200 200 right (layer-toggle nva))
+  rgt (tap-hold 200 200 rght (layer-toggle nva))
 
   ;; ### caps+space to return - nice feature, but interfers with tmux' ctrl-space
   ;;spc (fork @hun (unmod ret) (lctl 0)) ;; 
@@ -102,9 +109,9 @@
 |#
 (deflayer base
   esc        1    2    3    4    5      6    7    8    9    0    -    =    bspc     nlck kp/  kp*  esc
-  @tab       @q   @w   @e   r    t      @sp1 y    u    @i   @o   p    @bsp @bsp     home pgup end pgup
+  @tab       @q   @w   @e   r    t      @sp1 y    u    @i   @o   p    -    @bsp     home pgup end pgup
   @cap       @lsy s    d    @f   g      @sp2 h    @j   k    l    @rsy      @rrt     del  up   pgdn  
-  lsft lsft  z    x    c    v    b      @sp3 n    m    ,    .              @rsh     left down rght pgdn
+  lsft       z    x    c    v    b      @sp3 n    m    ,    .              @rsh     left down rght pgdn
   wkup lctl  lmet lalt           @hun                           @ralt @lft @rgt          ins  del  
 )                                                                                 
 
@@ -116,70 +123,70 @@
   _         f1   f2   f3   f4   f5      f6   f7   f8   f9   f10  f11  f12  del      _    _    _    _   
   _         _    f1   f2   f3   f10     _    ret  home up   end  pgup _    _        _    _    _    _
   _         _    f4   f5   f6   f11     _    del  left down rght pgdn      _        _    _    _    
-  _    _    _    f7   f8   f9   f12     _    ins  _    _    _              _        _    _    _    _
+  _         _    f7   f8   f9   f12     _    ins  _    _    _              _        _    _    _    _
   _    _    _    _              _                                _    _    _             _    _    
 )
 (deflayer nva
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _
   _         _    _    _    _    _       _    _    _    _    _    _         _        _    _    _    
-  _    _    _    _    _    _    _       _    _    _    _    _              up       _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _              up       _    _    _    _   
   _    _    _    _              ret                              _    down _             _    _    
 )
 (deflayer nvb
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
   _         _    _    _    _    _       _    _    _    _    _    _    _    home     _    _    _    _
   _         _    _    _    _    _       _    _    _    _    _    _         pgup     _    _    _    
-  _    _    _    _    _    _    _       _    _    _    _    _              pgdn     _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _              pgdn     _    _    _    _   
   _    _    _    _              ret                              _    _    end           _    _    
 )
 (deflayer numbers
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
   _         0    1    2    3    -       @sp5 ret  home up   end  pgup _    _        _    _    _    _
   @cap      S-8  4    5    6    S-=     XX   del  left down rght pgdn      _        _    _    _    
-  _    _    /    7    8    9    -       XX   ins  _    _    _              _        _    _    _    _   
+  _         /    7    8    9    -       XX   ins  _    _    _              _        _    _    _    _   
   _    _    _    _              ret                              _    home end           _    _    
 )
 (deflayer space_for_delete
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _
   _         _    _    _    _    _       _    _    _    _    _    _         _        _    _    _    
-  _    _    _    _    _    _    _       _    _    _    _    _              _        _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _              _        _    _    _    _   
   _    _    _    _              del               _    _    _                            _    _    
 )
 (deflayer space_for_return
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _
   _         _    _    _    _    _       _    _    _    _    _    _         _        _    _    _    
-  _    _    _    _    _    _    _       _    _    _    _    _              _        _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _              _        _    _    _    _   
   _    _    _    _              ret               _    _    _                            _    _    
 )
 (deflayer space_for_backspace
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _
   _         _    _    _    _    _       _    _    _    _    _    _         _        _    _    _    
-  _    _    _    _    _    _    _       _    _    _    _    _              _        _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _              _        _    _    _    _   
   _    _    _    _              bspc              _    _    _                            _    _    
 )
 (deflayer space_for_tab
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _
   _         _    _    _    _    _       _    _    _    _    _    _         _        _    _    _    
-  _    _    _    _    _    _    _       _    _    _    _    _              _        _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _              _        _    _    _    _   
   _    _    _    _              tab               _    _    _                            _    _    
 )
 (deflayer space_for_esc
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _
   _         _    _    _    _    _       _    _    _    _    _    _         _        _    _    _    
-  _    _    _    _    _    _    _       _    _    _    _    _              _        _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _              _        _    _    _    _   
   _    _    _    _              esc               _    _    _                            _    _    
 )
 (deflayer macros
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _   
   _         _    _    _    _    _       _    _    _    _    _    _    _    _        _    _    _    _
   _         _    _    _    @fix _       _    _    _    _    _    _         _        _    _    _    
-  _    _    _    _    _    _    _       _    _    _    _    _              _        _    _    _    _   
+  _         _    _    _    _    _       _    _    _    _    _              _        _    _    _    _   
   _    _    _    _              _                 _    _    _                            _    _    
 )
 
@@ -189,18 +196,18 @@
 In the current version of kanata we can't add yet symbols, we have to use the shift-notation: S-x
 for reference here is the layout with the symbols
   _         _    _    _    _    _       _    _    _    _    _    _    _    _       _    _    _    _
-  _         !    {    }    $    %       _    ^    *    '    "    &    _    _       _    _    _    _
+  _         !    {    }    $    %       _    ^    *    '    "    &    \_   _       _    _    _    _
   _         ~    [    ]    #    @       _    +    -    \(   \)   :         _       _    _    _    
-  _    _    `    .    /    |    \\      _    \_   =    <    >    ?                 _    _    _    _
+  _         `    .    /    |    \\      _    \_   =    <    >    ?                 _    _    _    _
   _    _    _    _              _                 _    _    _         _    _       _    _    _    
 
 We need backspace for q-space, and enter for ;-space, we can do this with two layers
 |#
 (deflayer symbols
   _         _    _    _    _    _       _    _    _    _    _    _    _    _       _    _    _    _
-  bspc      S-1  S-[  S-]  S-4  S-5     _    S-6  S-8  '    S-'  S-7  _    _       _    _    _    _
+  bspc      S-1  S-[  S-]  S-4  S-5     _    S-6  S-8  '    S-'  S-7  S--  _       _    _    _    _
   ret       S-`  [    ]    S-3  S-2     _    S-=  -    S-9  S-0  S-;       _       _    _    _    
-  _    _    `    @chd /    S-\  \       _    =    S--  S-,  S-.            S-/     _    _    _    _
+  _         `    @chd /    S-\  \       _    =    S--  S-,  S-.            S-/     _    _    _    _
   _    _    _    _              _                 _    _    _                           _    _    
 )
 
@@ -235,18 +242,18 @@ We need backspace for q-space, and enter for ;-space, we can do this with two la
 ;;caps      a    s    d    f    g       h    j    k    l    ;    '    \
 (deflayer hun
   grv       @í   _    _    _    _       _    _    @ű   @ú   @ő   @ó   _    _       _    _    _    _
-  _         @á   @ö   _    _    _       _    _    _    _    _    _    @ű   _       _    _    _    _
-  y         _    _    _    _    _       _    _    _    _    _    @é        @í      _    _    _    
-  @huc _    _    @ü   _    _    _       _    _    _    @ő   @ú             @ó      _    _    _    _
-  _    _    _    _              _                 _    _    _                           _    _    
+  _         @í   @ö   _    _    _       _    _    _    _    _    _    @ű   _       _    _    _    _
+  y         _    _    _    _    _       _    _    _    _    _    @é        @á       _    _    _    
+  @huc      _    @ü   _    _    _       _    _    _    @ő   @ú             @ó      _    _    _    _
+  _    _    _    _              _                 spc  _    _                           _    _    
 )
 
 
 (deflayer huc
   _         @Í   _    _    _    _       _    _    @Ű   @Ú   @Ő   @Ó   _    _       _    _    _    _
-  _         @Á   @Ö   _    _    _       _    _    _    _    _    _    @Ű   _       _    _    _    _
-  S-y       _    _    _    _    _       _    _    _    _    _    @É        @Í      _    _    _    
-  _    _    _    @Ü   _    _    _       _    _    _    @Ő   @Ú             @Ó      _    _    _    _
+  _         @Í   @Ö   _    _    _       _    _    _    _    _    _    @Ű   _       _    _    _    _
+  S-y       _    _    _    _    _       _    _    _    _    _    @É        @Á      _    _    _    
+  _         _    @Ü   _    _    _       _    _    _    @Ő   @Ú             @Ó      _    _    _    _
   _    _    _    _              _                 _    _    _                           _    _    
 )
 
