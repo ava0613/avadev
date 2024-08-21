@@ -41,6 +41,8 @@
   ;; ### symbols layer to homerow 'a' and ';'
   lsy (tap-hold 200 200 a (layer-toggle symbols))
   rsy (tap-hold 200 200 ; (layer-toggle symbols))
+  ;;min (tap-hold 200 200 (unicode _) (layer-toggle symbols))
+  min (tap-hold 200 200 - (layer-toggle symbols))
   
   ;; ### hungarian characters as space+X
   hun (tap-hold 200 200 spc (layer-toggle hun))
@@ -78,7 +80,7 @@
   chd (macro . . /)
   fix (macro S-f S-i S-x S-m S-e)
 
-  sp2 (caps-word-custom
+  Xsp2 (caps-word-custom
     2000
     (a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 -)
     (kp0 kp1 kp2 kp3 kp4 kp5 kp6 kp7 kp8 kp9 bspc del up down left rght)
@@ -87,7 +89,7 @@
   ;; ### split buttons
   sp1 (tap-dance 300 (XX (layer-switch numbers)))
   sp5 (tap-dance 300 (XX (layer-switch base)))
-  ;;sp2 (caps-word 2000)
+  sp2 (caps-word 2000)
   sp3 (layer-toggle macros)
 
   ;; ### nav nav
@@ -109,7 +111,7 @@
 |#
 (deflayer base
   esc        1    2    3    4    5      6    7    8    9    0    -    =    bspc     nlck kp/  kp*  esc
-  @tab       @q   @w   @e   r    t      @sp1 y    u    @i   @o   p    -    @bsp     home pgup end pgup
+  @tab       @q   @w   @e   r    t      @sp1 y    u    @i   @o   p    @min @bsp     home pgup end pgup
   @cap       @lsy s    d    @f   g      @sp2 h    @j   k    l    @rsy      @rrt     del  up   pgdn  
   lsft       z    x    c    v    b      @sp3 n    m    ,    .              @rsh     left down rght pgdn
   wkup lctl  lmet lalt           @hun                           @ralt @lft @rgt          ins  del  

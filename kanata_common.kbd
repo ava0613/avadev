@@ -1,0 +1,40 @@
+
+
+
+(defalias
+
+  ;; ### macros
+  chd (macro . . /)
+  fix (macro S-f S-i S-x S-m S-e)
+
+  
+
+  ;; ### split buttons
+  ;;sp1 (tap-dance 300 (XX (layer-switch numbers)))
+  ;;sp5 (tap-dance 300 (XX (layer-switch base)))
+  sp2 (caps-word 2000)
+  sp3 (layer-toggle macros)
+
+
+  ;; ### HUN chars
+  á    (unicode á)
+  Á    (unicode Á)
+  é    (unicode é)
+  É    (unicode É)
+  í    (unicode í)
+  Í    (unicode Í)
+  
+  ó    (unicode ó)
+  Ó    (unicode Ó)
+  ö    (unicode ö)
+  Ö    (unicode Ö)
+  ő    (unicode ő)
+  Ő    (unicode Ő)
+
+  ú    (unicode ú)
+  Ú    (unicode Ú)
+  ü    (unicode ü)
+  Ü    (unicode Ü)
+  ű    (unicode ű)
+  Ű    (unicode Ű)
+  )

@@ -1,0 +1,41 @@
+(defsrc
+  grv        1    2    3    4    5      6    7    8    9    0    -    =    bspc     
+  tab        q    w    e    r    t      f13  y    u    i    o    p            
+  caps       a    s    d    f    g      f14  h    j    k    l    ;         ret      
+  lsft       z    x    c    v    b  f15 f16  n    m    ,    .              rsft     
+)
+#|
+(defsrc f13 f14 f15 f16
+)
+|#
+
+(defcfg
+  ;; ava - not sure yet if this is needed in my case
+  ;;windows-altgr cancel-lctl-press ;; remove the lctl press that comes as a combo with ralt
+  
+  process-unmapped-keys yes
+)
+
+(include kanata_common.kbd)
+
+
+#| BASE layer 
+       
+
+(deflayer base @sp2 @sp2 @sp2 @sp2
+)
+|#
+
+(deflayer base
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _     
+  _         _    _    _    _    _       _    _    _    _    _    _            
+  _         _    _    _    _    _      @sp2  _    _    _    _    _         _       
+  _         _    _    _    _    _  _   @sp3  _    _    _    _              _     
+)
+
+(deflayer macros
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        
+  _         _    _    _    _    _       _    _    _    _    _    _            
+  _         _    _    _    @fix _       _    _    _    _    _    _         _        
+  _         _    _    @chd _    _   _   _    _    _    _    _              _       
+)
