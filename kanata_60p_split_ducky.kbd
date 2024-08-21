@@ -41,8 +41,8 @@
   ;; ### symbols layer to homerow 'a' and ';'
   lsy (tap-hold 200 200 a (layer-toggle symbols))
   rsy (tap-hold 200 200 ; (layer-toggle symbols))
-  ;;min (tap-hold 200 200 (unicode _) (layer-toggle symbols))
-  min (tap-hold 200 200 - (layer-toggle symbols))
+  min (tap-hold 200 200 (unicode -) (layer-toggle symbols))
+  ;;min (tap-hold 200 200 - (layer-toggle symbols))
   
   ;; ### hungarian characters as space+X
   hun (tap-hold 200 200 spc (layer-toggle hun))
