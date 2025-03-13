@@ -1,0 +1,1 @@
+kanata_wintercept.exe -c kanata_keychrone_k11.kbd

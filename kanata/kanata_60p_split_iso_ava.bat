@@ -1,0 +1,1 @@
+kanata_wintercept.exe -c kanata_60p_split_iso_ava.kbd

@@ -1,0 +1,69 @@
+(defsrc
+  esc        1    2    3    4    5      6    7    8    9    0    -    =    ins     
+  tab        q    w    e    r    t      f13  y    u    i    o    p    bspc del       
+  caps       a    s    d    f    g      f14  h    j    k    l    ;         ret      
+  lsft       z    x    c    v    b  f15 f16  n    m    ,    .              /
+  lctl  lmet lalt      spc       f1     f2  f3        ralt 
+)
+#|
+(defsrc f13 f14 f15 f16
+)
+|#
+
+(defcfg
+  ;; ava - not sure yet if this is needed in my case
+  ;;windows-altgr cancel-lctl-press ;; remove the lctl press that comes as a combo with ralt
+  
+  process-unmapped-keys yes
+)
+
+(include kanata_common.kbd)
+
+
+#| BASE layer 
+       
+
+(deflayer base @sp2 @sp2 @sp2 @sp2
+)
+|#
+
+(deflayer base
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _     
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _    
+  _         _    _    _    _    _      @sp2  _    _    _    _    _         _       
+  _         _    _    _    _    _  _   @sp3  _    _    _    _              _  
+  _   _     _         @hun      _      _    _              _  
+)
+
+
+
+(deflayer macros
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _        
+  _         _    _    _    _    _       _    _    _    _    _    _    _    _    
+  _         _    _    _    @fix _       _    _    _    _    _    _         _        
+  _         _    _    @chd _    _   _   _    _    _    _    _              _       
+  _   _     _         _         _       _    _              _  
+)
+
+
+
+
+;;          q    w    e    r    t       y    u    i    o    p    [    ]    ret  
+;;caps      a    s    d    f    g       h    j    k    l    ;    '    \
+(deflayer hun
+  _         @í   _    _    _    _       _    _    @ű   @ú   @ő   @ó   _    _     
+  _         @í   @ö   _    _    _       _    _    _    _    _    _    @ű   _     
+  _         _    _    _    _    _       _    _    _    _    _    @é        @ú    
+  @huc      _    @ü   _    _    _   _   _    _    _    @ő   @á             @ó    
+  _   _     _         _         _       _    _              _  
+)
+
+
+(deflayer huc
+  _         @Í   _    _    _    _       _    _    @Ű   @Ú   @Ő   @Ó   _    _      
+  _         @Í   @Ö   _    _    _       _    _    _    _    _    _    @Ű   _      
+  _         _    _    _    _    _       _    _    _    _    _    @É        @Ú     
+  _         _    @Ü   _    _    _   _   _    _    _    @Ő   @Á             @Ó     
+  _   _     _         _         _       _    _              _  
+)
+
